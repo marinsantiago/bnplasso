@@ -1,1 +1,2 @@
-*.Rd linguist-documentation
+*.Rd linguist-detectable=false
+
