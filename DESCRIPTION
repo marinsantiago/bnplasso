@@ -19,8 +19,14 @@ Description:
     Marin et al. (2025+) <https://doi.org/10.48550/arXiv.2411.08262>. 
 License: GPL (>= 2)
 Language: en-US
-Imports: Rcpp (>= 1.0.14), actuar, progress, stats, coda, FKSUM,
-        graphics
+Imports: 
+    Rcpp (>= 1.0.14),
+    actuar,
+    progress,
+    stats,
+    coda,
+    FKSUM,
+    graphics
 LinkingTo: Rcpp, RcppEigen
 URL: https://github.com/marinsantiago/bnplasso
 BugReports: https://github.com/marinsantiago/bnplasso/issues
