@@ -59,11 +59,11 @@ If you use any part of this code in your work, please consider citing our paper:
 
 ## <a name="refs"></a> References
 
-Leng, C., M.-N. Tran, and D. Nott (2014). "Bayesian adaptive lasso." Annals of the Institute of Statistical Mathematics 66, 221–244
+Leng, C., Tran, M.-N., and Nott, D. (2014). "Bayesian adaptive lasso." Annals of the Institute of Statistical Mathematics 66, 221–244
 
 Marin, S., Loong, B., and Westveld, A. H. (2025+). "Adaptive Shrinkage with a Nonparametric Bayesian Lasso."
 
-Park, T. and G. Casella (2008). "The Bayesian lasso." Journal of the American Statistical Association, 103 (482), 681–686.
+Park, T. and Casella, G. (2008). "The Bayesian lasso." Journal of the American Statistical Association, 103 (482), 681–686.
 
 </br>
 
