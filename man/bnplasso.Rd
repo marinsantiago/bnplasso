@@ -14,17 +14,24 @@ described in Marin et al. (2025+)
 }
 \references{
 S. Marin, B. Long,and A. H. Westveld (2025+), Adaptive Shrinkage with a 
-Nonparametric Bayesian Lasso. \emph{arXiv}, {2411.08262}.
+Nonparametric Bayesian Lasso. \emph{Journal of Computational and Graphical 
+Statistics} (to appear).
 }
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/marinsantiago/bnplasso/issues}
+  \item \url{https://github.com/marinsantiago/bnplasso}
   \item Report bugs at \url{https://github.com/marinsantiago/bnplasso/issues}
 }
 
 }
 \author{
 \strong{Maintainer}: Santiago Marin \email{santiago.marinardila@anu.edu.au} (\href{https://orcid.org/0009-0006-0086-3721}{ORCID})
+
+Other contributors:
+\itemize{
+  \item Bronwyn Loong \email{bronwyn.loong@anu.edu.au} (\href{https://orcid.org/0000-0002-1409-8892}{ORCID}) [contributor]
+  \item Anton H. Westveld \email{anton.westveld@anu.edu.au} (\href{https://orcid.org/0000-0003-1671-0931}{ORCID}) [contributor]
+}
 
 }

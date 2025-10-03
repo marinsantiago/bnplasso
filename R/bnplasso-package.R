@@ -11,6 +11,7 @@
 #' @references
 #' 
 #' S. Marin, B. Long,and A. H. Westveld (2025+), Adaptive Shrinkage with a 
-#' Nonparametric Bayesian Lasso. \emph{arXiv}, {2411.08262}.
+#' Nonparametric Bayesian Lasso. \emph{Journal of Computational and Graphical 
+#' Statistics} (to appear).
 #' 
 "_PACKAGE"

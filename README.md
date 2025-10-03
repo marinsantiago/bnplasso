@@ -2,7 +2,7 @@
 
 <!-- badges: start -->
 
-![R-CMD-check](https://github.com/marinsantiago/bnplasso/workflows/R-CMD-check/badge.svg)
+![R-CMD-check](https://github.com/marinsantiago/BOBgmms/workflows/R-CMD-check/badge.svg)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 
 <!-- badges: end -->
@@ -12,8 +12,6 @@
 ## Overview
 
 This repository contains the R package `bnplasso` (developer's version), which implements the [Nonparametric Bayesian Lasso](https://arxiv.org/abs/2411.08262) (Marin et al., 2025+).
-
-The main routine of the package, ```bnplasso.lm()```, returns an object of S3 class, ```"lmBayes"```, which is supported by various methods like ```print()```, ```summary()```, ```plot()```, ```fitted()```, ```residuals()```, ```coef()```, and ```predict()```, allowing users to quickly visualize, evaluate, and analyze the output in a familiar fashion. The package also implements the Bayesian Lasso (Park and Casella, 2008) and the Bayesian adaptive Lasso (Leng et al., 2014), through the functions ```blasso.lm()``` and ```balasso.lm()```, respectively.
 
 ## Installation
 
@@ -59,21 +57,4 @@ If you use any part of this code in your work, please consider citing our paper:
 
 ## <a name="refs"></a> References
 
-Leng, C., Tran, M.-N., and Nott, D. (2014). "Bayesian adaptive lasso." Annals of the Institute of Statistical Mathematics 66, 221–244
-
-Marin, S., Loong, B., and Westveld, A. H. (2025+). "Adaptive Shrinkage with a Nonparametric Bayesian Lasso."
-
-Park, T. and Casella, G. (2008). "The Bayesian lasso." Journal of the American Statistical Association, 103 (482), 681–686.
-
-</br>
-
-```
-# Disclaimer:
-#
-# The software is provided "as is", without warranty of any kind, express or implied,
-# including but not limited to the warranties of merchantability, fitness for a particular
-# purpose and noninfringement. In no event shall the authors or copyright holders be liable
-# for any claim, damages, or other liability, whether in an action of contract, 
-# tort or otherwise, arising from, out of, or in connection with the software or the use
-# or other dealings in the software.
-```
+Marin, S., Loong, B., and Westveld, A. H. (2025+), "Adaptive Shrinkage with a Nonparametric Bayesian Lasso." *Journal of computational and Graphical Statistics* (to appear).

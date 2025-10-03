@@ -7,10 +7,10 @@
 #'   of the \eqn{n} rows is an observation vector.
 #' @param y Response variable. It should be a numeric vector size \eqn{n}.
 #' @param a A positive scalar corresponding to the \bold{shape} parameter in the 
-#'   gamma distribution used as hyper-prior in the shrinkage parameter 
+#'   gamma distribution used as hyper-prior in the shrinkage parameter,
 #'   \eqn{\lambda^{2}}.
 #' @param b A positive scalar corresponding to the \bold{rate} parameter in the 
-#'   gamma distribution used as hyper-prior in the shrinkage parameter 
+#'   gamma distribution used as hyper-prior in the shrinkage parameter,
 #'   \eqn{\lambda^{2}}.
 #' @param intercept Logical. If \code{TRUE} an intercept term is included in the
 #'   model; otherwise, the intercept is integrated out. Default is \code{TRUE}.

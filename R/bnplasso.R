@@ -77,7 +77,8 @@
 #' @references
 #'
 #' S. Marin, B. Long,and A. H. Westveld (2025+), Adaptive Shrinkage with a 
-#' Nonparametric Bayesian Lasso. \emph{arXiv}, {2411.08262}.
+#' Nonparametric Bayesian Lasso.\emph{Journal of Computational and Graphical 
+#' Statistics} (to appear).
 #' 
 #' G. E. Moran, V. Rockova, and E. I. George (2019), Variance Prior Forms for 
 #' High-Dimensional Bayesian Variable Selection. \emph{Bayesian Analysis},

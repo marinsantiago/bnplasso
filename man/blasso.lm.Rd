@@ -23,11 +23,11 @@ of the \eqn{n} rows is an observation vector.}
 \item{y}{Response variable. It should be a numeric vector size \eqn{n}.}
 
 \item{a}{A positive scalar corresponding to the \bold{shape} parameter in the 
-gamma distribution used as hyper-prior in the shrinkage parameter 
+gamma distribution used as hyper-prior in the shrinkage parameter,
 \eqn{\lambda^{2}}.}
 
 \item{b}{A positive scalar corresponding to the \bold{rate} parameter in the 
-gamma distribution used as hyper-prior in the shrinkage parameter 
+gamma distribution used as hyper-prior in the shrinkage parameter,
 \eqn{\lambda^{2}}.}
 
 \item{intercept}{Logical. If \code{TRUE} an intercept term is included in the
