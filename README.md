@@ -13,6 +13,13 @@
 
 This repository contains the R package `bnplasso` (developer's version), which implements the [Nonparametric Bayesian Lasso](https://arxiv.org/abs/2411.08262) (Marin et al., 2025+).
 
+The main routine of the package, ```bnplasso.lm()```, returns an object of S3 class, ```"lmBayes"```, which is supported by various methods 
+like ```print()```, ```summary()```, ```plot()```, ```fitted()```, ```residuals()```, ```coef()```, 
+and ```predict()```, allowing users to quickly visualize, evaluate, and analyze the output in a familiar fashion. 
+The package also implements the Bayesian Lasso (Park and Casella, 2008) and the Bayesian 
+adaptive Lasso (Leng et al., 2014), through the functions ```blasso.lm()``` 
+and ```balasso.lm()```, respectively.
+
 ## Installation
 
 You can install the developer's version via `devtools` as:
@@ -55,6 +62,23 @@ If you use any part of this code in your work, please consider citing our paper:
 }
 ```
 
+
+```
+# Disclaimer:
+#
+# The software is provided "as is", without warranty of any kind, express or implied,
+# including but not limited to the warranties of merchantability, fitness for a particular
+# purpose and noninfringement. In no event shall the authors or copyright holders be liable
+# for any claim, damages, or other liability, whether in an action of contract, 
+# tort or otherwise, arising from, out of, or in connection with the software or the use
+# or other dealings in the software.
+```
+
+
 ## <a name="refs"></a> References
 
-Marin, S., Loong, B., and Westveld, A. H. (2025+), "Adaptive Shrinkage with a Nonparametric Bayesian Lasso." *Journal of computational and Graphical Statistics* (to appear).
+Leng, C., Tran, M.-N., and Nott, D. (2014). "Bayesian Adaptive Lasso." *Annals of the Institute of Statistical Mathematics*, 66, 221–244
+
+Marin, S., Loong, B., and Westveld, A. H. (2025+), "Adaptive Shrinkage with a Nonparametric Bayesian Lasso." *Journal of Computational and Graphical Statistics* (to appear).
+
+Park, T. and Casella, G. (2008). "The Bayesian Lasso." *Journal of the American Statistical Association*, 103 (482), 681–686.
