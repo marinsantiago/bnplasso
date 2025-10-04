@@ -2,7 +2,7 @@
 
 <!-- badges: start -->
 
-![R-CMD-check](https://github.com/marinsantiago/BOBgmms/workflows/R-CMD-check/badge.svg)
+[![R-CMD-check](https://github.com/marinsantiago/bnplasso/workflows/R-CMD-check/badge.svg)](https://github.com/marinsantiago/bnplasso/workflows/R-CMD-check/badge.svg)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 
 <!-- badges: end -->
@@ -74,7 +74,6 @@ If you use any part of this code in your work, please consider citing our paper:
 # tort or otherwise, arising from, out of, or in connection with the software or the use
 # or other dealings in the software.
 ```
-
 
 ## <a name="refs"></a> References
 
