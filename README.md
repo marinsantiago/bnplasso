@@ -51,7 +51,7 @@ Detailed guidelines for using the package functions are referred to their help p
 
 If you use any part of this code in your work, please consider citing our paper:
 
-```
+```TeX
 @misc{marin_bnplasso,
   title         = {Adaptive Shrinkage with a Nonparametric Bayesian Lasso}, 
   author        = {Santiago Marin and Bronwyn Loong and Anton H. Westveld},
@@ -64,16 +64,16 @@ If you use any part of this code in your work, please consider citing our paper:
 
 ## Disclaimer
 
-```
-# Disclaimer:
-#
-# The software is provided "as is", without warranty of any kind, express or implied,
-# including but not limited to the warranties of merchantability, fitness for a particular
-# purpose and noninfringement. In no event shall the authors or copyright holders be liable
-# for any claim, damages, or other liability, whether in an action of contract, 
-# tort or otherwise, arising from, out of, or in connection with the software or the use
-# or other dealings in the software.
-```
+<span style="font-family: Consolas, 'Courier New', monospace;">
+Disclaimer:
+The software is provided "as is", without warranty of any kind, express or implied,
+including but not limited to the warranties of merchantability, fitness for a particular
+purpose and noninfringement. In no event shall the authors or copyright holders be liable
+for any claim, damages, or other liability, whether in an action of contract, 
+tort or otherwise, arising from, out of, or in connection with the software or the use
+or other dealings in the software.
+</span>
+
 
 ## <a name="refs"></a> References
 
