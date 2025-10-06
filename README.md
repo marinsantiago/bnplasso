@@ -64,16 +64,12 @@ If you use any part of this code in your work, please consider citing our paper:
 
 ## Disclaimer
 
-<span style="font-family: Consolas, 'Courier New', monospace;">
-Disclaimer:
 The software is provided "as is", without warranty of any kind, express or implied,
 including but not limited to the warranties of merchantability, fitness for a particular
 purpose and noninfringement. In no event shall the authors or copyright holders be liable
 for any claim, damages, or other liability, whether in an action of contract, 
 tort or otherwise, arising from, out of, or in connection with the software or the use
 or other dealings in the software.
-</span>
-
 
 ## <a name="refs"></a> References
 
@@ -82,3 +78,5 @@ Leng, C., Tran, M.-N., and Nott, D. (2014). "Bayesian Adaptive Lasso." *Annals o
 Marin, S., Loong, B., and Westveld, A. H. (2025+), "Adaptive Shrinkage with a Nonparametric Bayesian Lasso." *Journal of Computational and Graphical Statistics* (to appear).
 
 Park, T. and Casella, G. (2008). "The Bayesian Lasso." *Journal of the American Statistical Association*, 103 (482), 681–686.
+
+
