@@ -12,8 +12,10 @@
 #'   gamma distribution used as a centering measure in the DP prior.
 #' @param alpha A positive scalar corresponding to the \bold{concentration}
 #'   parameter in the DP prior.
-#' @param intercept Logical. If \code{TRUE} an intercept term is included in the
-#'   model; otherwise, the intercept is integrated out. Default is \code{FALSE}.
+#' @param intercept Logical. If \code{TRUE}, an intercept term is included in the
+#'   model; otherwise, the intercept is integrated out. If \code{TRUE}, the 
+#'   prior on the intercept would be a non-informative prior of the form 
+#'   \eqn{p(\mu)\propto 1}. Default is \code{FALSE}.
 #' @param variance.prior.type A character string denoting whether the variance 
 #'   on the sampling variance should be an independent-type prior or a 
 #'   conjugate-type prior. See Moran et al. (2019) for details. The options are 
@@ -78,7 +80,7 @@
 #'
 #' S. Marin, B. Long,and A. H. Westveld (2025+), Adaptive Shrinkage with a 
 #' Nonparametric Bayesian Lasso.\emph{Journal of Computational and Graphical 
-#' Statistics} (to appear).
+#' Statistics}. doi:10.1080/10618600.2025.2572327
 #' 
 #' G. E. Moran, V. Rockova, and E. I. George (2019), Variance Prior Forms for 
 #' High-Dimensional Bayesian Variable Selection. \emph{Bayesian Analysis},

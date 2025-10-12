@@ -31,7 +31,7 @@ Description:
     Bayesian regression and variable selection. The package uses an efficient
     Markov chain Monte Carlo algorithm to generate draws from the posterior
     distribution of the model parameters. For additional details, please see 
-    Marin et al. (2025+) <https://doi.org/10.48550/arXiv.2411.08262>. 
+    Marin et al. (2025+) <https://doi.org/10.1080/10618600.2025.2572327>. 
 License: GPL (>= 2)
 Language: en-US
 Imports: Rcpp (>= 1.0.14), actuar, progress, stats, coda, FKSUM,
@@ -43,7 +43,7 @@ Depends: R (>= 4.2.0)
 Encoding: UTF-8
 RoxygenNote: 7.3.2
 NeedsCompilation: yes
-Packaged: 2025-10-03 01:39:28 UTC; santiago
+Packaged: 2025-10-12 06:41:20 UTC; santiago
 Author: Santiago Marin [aut, cre] (<https://orcid.org/0009-0006-0086-3721>),
   Bronwyn Loong [ctb] (<https://orcid.org/0000-0002-1409-8892>),
   Anton H. Westveld [ctb] (<https://orcid.org/0000-0003-1671-0931>)

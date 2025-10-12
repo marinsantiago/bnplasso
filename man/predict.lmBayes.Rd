@@ -18,7 +18,7 @@ A matrix where each row corresponds to an MCMC draw and each column
 to an observation in the new data.
 }
 \description{
-Compute the posterior predictive distribution of an object of class 
+Compute the posterior predictive distribution for an object of class 
 \code{lmBayes}.
 }
 \author{

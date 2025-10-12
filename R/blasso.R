@@ -12,8 +12,10 @@
 #' @param b A positive scalar corresponding to the \bold{rate} parameter in the 
 #'   gamma distribution used as hyper-prior in the shrinkage parameter,
 #'   \eqn{\lambda^{2}}.
-#' @param intercept Logical. If \code{TRUE} an intercept term is included in the
-#'   model; otherwise, the intercept is integrated out. Default is \code{TRUE}.
+#' @param intercept Logical. If \code{TRUE}, an intercept term is included in the
+#'   model; otherwise, the intercept is integrated out. If \code{TRUE}, the 
+#'   prior on the intercept would be a non-informative prior of the form 
+#'   \eqn{p(\mu)\propto 1}. Default is \code{FALSE}.
 #' @param variance.prior.type A character string denoting whether the variance 
 #'   on the sampling variance should be an independent-type prior or a 
 #'   conjugate-type prior. See Moran et al. (2019) for details. The options are

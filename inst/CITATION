@@ -2,11 +2,11 @@ bibentry(
   bibtype = "Article",
   title   = "Adaptive Shrinkage with a Nonparametric Bayesian Lasso",
   author  = "Santiago Marin and Bronwyn Loong and Anton H. Westveld",
-  journal = "arXiv",
-  year    = "2024",
-  volume  = "2411.08262",
-  number  = "2411.08262",
-  pages   = "2411.08262",
-  doi     = "https://arxiv.org/abs/2411.08262",
+  journal = "Journal of Computational and Graphical Statistics",
+  year    = "2025",
+  volume  = "",
+  number  = "",
+  pages   = "",
+  doi     = "https://doi.org/10.1080/10618600.2025.2572327 ",
   header  = "To cite bnplasso in publications please use:"
 )

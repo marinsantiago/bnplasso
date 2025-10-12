@@ -30,8 +30,10 @@ gamma distribution used as hyper-prior in the shrinkage parameters,
 gamma distribution used as hyper-prior in the shrinkage parameters,
 \eqn{\lambda_{j}^{2}}, for \eqn{j\in\{1,\dots,n\}}.}
 
-\item{intercept}{Logical. If \code{TRUE} an intercept term is included in the
-model; otherwise, the intercept is integrated out. Default is \code{TRUE}.}
+\item{intercept}{Logical. If \code{TRUE}, an intercept term is included in the
+model; otherwise, the intercept is integrated out. If \code{TRUE}, the 
+prior on the intercept would be a non-informative prior of the form 
+\eqn{p(\mu)\propto 1}. Default is \code{FALSE}.}
 
 \item{variance.prior.type}{A character string denoting whether the variance 
 on the sampling variance should be an independent-type prior or a 

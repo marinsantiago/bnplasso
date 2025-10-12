@@ -12,7 +12,8 @@
 \item{...}{Further arguments passed to.}
 }
 \description{
-Produces posterior predictive and residual diagnostic plots.
+Produces posterior predictive and residual diagnostic plots for an object of 
+class \code{'lmBayes'}.
 }
 \author{
 Santiago Marin

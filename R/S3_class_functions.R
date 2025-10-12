@@ -233,7 +233,8 @@ summary.lmBayes <- function(object, ...) {
 
 #' Plot the results and diagnostics for an object of class \code{lmBayes}.
 #'
-#' Produces posterior predictive and residual diagnostic plots.
+#' Produces posterior predictive and residual diagnostic plots for an object of 
+#' class \code{'lmBayes'}.
 #'
 #' @param x An object of class 'lmBayes'.
 #' @param ... Further arguments passed to.
@@ -339,7 +340,7 @@ coefficients.lmBayes <- coef.lmBayes
 
 #' Posterior predictive distribution for new data.
 #'
-#' Compute the posterior predictive distribution of an object of class 
+#' Compute the posterior predictive distribution for an object of class 
 #' \code{lmBayes}.
 #'
 #' @param object An object of class 'lmBayes'.
