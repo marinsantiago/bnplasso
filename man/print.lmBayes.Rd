@@ -2,7 +2,7 @@
 % Please edit documentation in R/S3_class_functions.R
 \name{print.lmBayes}
 \alias{print.lmBayes}
-\title{Print the results for an object of class \code{'lmBayes'}.}
+\title{Print the results for an object of class \code{'lmBayes'}}
 \usage{
 \method{print}{lmBayes}(x, ...)
 }
@@ -12,7 +12,7 @@
 \item{...}{Further arguments passed to.}
 }
 \description{
-Print the results for an object of class \code{'lmBayes'}.
+Print the results for an object of class \code{'lmBayes'}
 }
 \author{
 Santiago Marin

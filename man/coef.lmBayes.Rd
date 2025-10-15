@@ -3,7 +3,7 @@
 \name{coef.lmBayes}
 \alias{coef.lmBayes}
 \alias{coefficients.lmBayes}
-\title{Regression coefficients from an object of class \code{lmBayes}.}
+\title{Regression coefficients from an object of class \code{lmBayes}}
 \usage{
 \method{coef}{lmBayes}(object, ...)
 }

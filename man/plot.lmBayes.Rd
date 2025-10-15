@@ -2,7 +2,7 @@
 % Please edit documentation in R/S3_class_functions.R
 \name{plot.lmBayes}
 \alias{plot.lmBayes}
-\title{Plot the results and diagnostics for an object of class \code{lmBayes}.}
+\title{Plot the results and diagnostics for an object of class \code{lmBayes}}
 \usage{
 \method{plot}{lmBayes}(x, ...)
 }

@@ -92,7 +92,7 @@ scaled.neighbor.criterion <- function(object, retain) {
 
 
 #' Point estimates of the regression coefficients for an object of class 
-#' \code{lmBayes}.
+#' \code{lmBayes}
 #'
 #' Compute point estimates of the regression coefficients for an object of class 
 #' \code{lmBayes}.

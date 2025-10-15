@@ -2,7 +2,7 @@
 % Please edit documentation in R/S3_class_functions.R
 \name{predict.lmBayes}
 \alias{predict.lmBayes}
-\title{Posterior predictive distribution for new data.}
+\title{Posterior predictive distribution for new data}
 \usage{
 \method{predict}{lmBayes}(object, X.new, ...)
 }

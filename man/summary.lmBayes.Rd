@@ -2,7 +2,7 @@
 % Please edit documentation in R/S3_class_functions.R
 \name{summary.lmBayes}
 \alias{summary.lmBayes}
-\title{Summary table of the results for an object of class \code{'lmBayes'}.}
+\title{Summary table of the results for an object of class \code{'lmBayes'}}
 \usage{
 \method{summary}{lmBayes}(object, ...)
 }
@@ -12,7 +12,7 @@
 \item{...}{Further arguments passed to.}
 }
 \description{
-Summary table of the results for an object of class \code{'lmBayes'}.
+Summary table of the results for an object of class \code{'lmBayes'}
 }
 \author{
 Santiago Marin

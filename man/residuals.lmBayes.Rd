@@ -3,7 +3,7 @@
 \name{residuals.lmBayes}
 \alias{residuals.lmBayes}
 \alias{resid.lmBayes}
-\title{Residuals from an object of class \code{lmBayes}.}
+\title{Residuals from an object of class \code{lmBayes}}
 \usage{
 \method{residuals}{lmBayes}(object, ...)
 }

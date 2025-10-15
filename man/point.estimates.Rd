@@ -3,7 +3,7 @@
 \name{point.estimates}
 \alias{point.estimates}
 \title{Point estimates of the regression coefficients for an object of class 
-\code{lmBayes}.}
+\code{lmBayes}}
 \usage{
 point.estimates(object, type = "sn", retain = "mode")
 }

@@ -3,7 +3,7 @@
 \name{fitted.lmBayes}
 \alias{fitted.lmBayes}
 \alias{fitted.values.lmBayes}
-\title{Fitted Values from an object of class \code{lmBayes}.}
+\title{Fitted Values from an object of class \code{lmBayes}}
 \usage{
 \method{fitted}{lmBayes}(object, ...)
 }

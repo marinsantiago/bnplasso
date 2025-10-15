@@ -189,7 +189,7 @@ postpred.newdata <- function(object, X.new) {
 # Class specific main routines -------------------------------------------------
 
 
-#' Print the results for an object of class \code{'lmBayes'}.
+#' Print the results for an object of class \code{'lmBayes'}
 #'
 #' @param x An object of class 'lmBayes'.
 #' @param ... Further arguments passed to.
@@ -203,7 +203,7 @@ print.lmBayes <- function(x, ...) {
 }
 
 
-#' Summary table of the results for an object of class \code{'lmBayes'}.
+#' Summary table of the results for an object of class \code{'lmBayes'}
 #'
 #' @param object An object of class 'lmBayes'.
 #' @param ... Further arguments passed to.
@@ -231,7 +231,7 @@ summary.lmBayes <- function(object, ...) {
 }
 
 
-#' Plot the results and diagnostics for an object of class \code{lmBayes}.
+#' Plot the results and diagnostics for an object of class \code{lmBayes}
 #'
 #' Produces posterior predictive and residual diagnostic plots for an object of 
 #' class \code{'lmBayes'}.
@@ -257,7 +257,7 @@ plot.lmBayes <- function(x, ...) {
 }
 
 
-#' Fitted Values from an object of class \code{lmBayes}. 
+#' Fitted Values from an object of class \code{lmBayes} 
 #'
 #' Summary statistics of the posterior predictive distribution of the 
 #' fitted values from an object of class \code{lmBayes}.
@@ -285,7 +285,7 @@ fitted.lmBayes <- function(object, ...) {
 fitted.values.lmBayes <- fitted.lmBayes
 
 
-#' Residuals from an object of class \code{lmBayes}.
+#' Residuals from an object of class \code{lmBayes}
 #'
 #' Summary statistics of the posterior predictive distribution of the 
 #' residuals from an object of class \code{lmBayes}.
@@ -313,7 +313,7 @@ residuals.lmBayes <- function(object, ...) {
 resid.lmBayes <- residuals.lmBayes
 
 
-#' Regression coefficients from an object of class \code{lmBayes}.
+#' Regression coefficients from an object of class \code{lmBayes}
 #'
 #' Summary statistics of the posterior distribution of the regression 
 #' coefficients from an object of class \code{lmBayes}.
@@ -338,7 +338,7 @@ coef.lmBayes <- function(object, ...) {
 coefficients.lmBayes <- coef.lmBayes
 
 
-#' Posterior predictive distribution for new data.
+#' Posterior predictive distribution for new data
 #'
 #' Compute the posterior predictive distribution for an object of class 
 #' \code{lmBayes}.
