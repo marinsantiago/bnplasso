@@ -1,4 +1,4 @@
-# bnplasso <img src="man/figures/bnplasso.png" alt="bnplasso" width="140" height="150" align="right"> 
+# bnplasso <img src="man/figures/bnplasso.png" alt="bnplasso" width="130" height="150" align="right"> 
 
 <!-- badges: start -->
 
