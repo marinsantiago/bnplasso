@@ -28,7 +28,7 @@ You can install the latest developer's version via `devtools` as:
 devtools::install_github("marinsantiago/bnplasso")
 ```
 
-A detailed `NEWS` changelog is available HERE
+A detailed `NEWS` changelog is available [here](https://marinsantiago.github.io/bnplasso-site/news/index.html)
 
 If you wish to reproduce the results from Marin et al. (2025+), you should download the version of the 
 package employed at that time (`bnplasso` v0.1.0). That can easily be done by running in R
