@@ -27,6 +27,23 @@ Eigen::VectorXd NumVec_to_EigenVec(Rcpp::NumericVector & x) {
 
 
 /**
+ * Function to convert an Rcpp::NumericVector into an Eigen::VectorXf (float)! \ 
+ *                                                                             \
+ * @param x Rcpp::NumericVector: A vector to convert into Eigen::VectorXf      \
+ *                                                                             \
+ * @return Eigen::VectorXf: Converted vector (as float)!                       \
+ */
+// [[Rcpp::export]]
+Eigen::VectorXf NumVec_to_EigenVec_float(const Rcpp::NumericVector & x) {
+  Eigen::VectorXf out(x.size());
+  for (int i = 0; i < x.size(); ++i) {
+    out[i] = static_cast<float>(x[i]);
+  }
+  return out;
+}
+
+
+/**
  * Function to convert an Eigen::VectorXd into an Rcpp::NumericVector          \ 
  *                                                                             \
  * @param x Eigen::VectorXd: A vector to convert into Rcpp::NumericVector      \

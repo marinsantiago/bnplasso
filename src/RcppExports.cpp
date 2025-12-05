@@ -41,6 +41,23 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// sample_beta_conj_sigma_float
+Eigen::VectorXf sample_beta_conj_sigma_float(const Eigen::MatrixXf& X, const Eigen::MatrixXf& tX, const Eigen::MatrixXf& tXX, const Eigen::VectorXf& y, const Eigen::VectorXf& tau2, const float sigma2, const float mu);
+RcppExport SEXP _bnplasso_sample_beta_conj_sigma_float(SEXP XSEXP, SEXP tXSEXP, SEXP tXXSEXP, SEXP ySEXP, SEXP tau2SEXP, SEXP sigma2SEXP, SEXP muSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const Eigen::MatrixXf& >::type X(XSEXP);
+    Rcpp::traits::input_parameter< const Eigen::MatrixXf& >::type tX(tXSEXP);
+    Rcpp::traits::input_parameter< const Eigen::MatrixXf& >::type tXX(tXXSEXP);
+    Rcpp::traits::input_parameter< const Eigen::VectorXf& >::type y(ySEXP);
+    Rcpp::traits::input_parameter< const Eigen::VectorXf& >::type tau2(tau2SEXP);
+    Rcpp::traits::input_parameter< const float >::type sigma2(sigma2SEXP);
+    Rcpp::traits::input_parameter< const float >::type mu(muSEXP);
+    rcpp_result_gen = Rcpp::wrap(sample_beta_conj_sigma_float(X, tX, tXX, y, tau2, sigma2, mu));
+    return rcpp_result_gen;
+END_RCPP
+}
 // sample_beta_ind_sigma
 Eigen::VectorXd sample_beta_ind_sigma(const Eigen::MatrixXd& X, const Eigen::MatrixXd& tX, const Eigen::MatrixXd& tXX, const Eigen::VectorXd& y, const Eigen::VectorXd& tau2, const double sigma2, const double mu);
 RcppExport SEXP _bnplasso_sample_beta_ind_sigma(SEXP XSEXP, SEXP tXSEXP, SEXP tXXSEXP, SEXP ySEXP, SEXP tau2SEXP, SEXP sigma2SEXP, SEXP muSEXP) {
@@ -58,6 +75,23 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// sample_beta_ind_sigma_float
+Eigen::VectorXf sample_beta_ind_sigma_float(const Eigen::MatrixXf& X, const Eigen::MatrixXf& tX, const Eigen::MatrixXf& tXX, const Eigen::VectorXf& y, const Eigen::VectorXf& tau2, const float sigma2, const float mu);
+RcppExport SEXP _bnplasso_sample_beta_ind_sigma_float(SEXP XSEXP, SEXP tXSEXP, SEXP tXXSEXP, SEXP ySEXP, SEXP tau2SEXP, SEXP sigma2SEXP, SEXP muSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const Eigen::MatrixXf& >::type X(XSEXP);
+    Rcpp::traits::input_parameter< const Eigen::MatrixXf& >::type tX(tXSEXP);
+    Rcpp::traits::input_parameter< const Eigen::MatrixXf& >::type tXX(tXXSEXP);
+    Rcpp::traits::input_parameter< const Eigen::VectorXf& >::type y(ySEXP);
+    Rcpp::traits::input_parameter< const Eigen::VectorXf& >::type tau2(tau2SEXP);
+    Rcpp::traits::input_parameter< const float >::type sigma2(sigma2SEXP);
+    Rcpp::traits::input_parameter< const float >::type mu(muSEXP);
+    rcpp_result_gen = Rcpp::wrap(sample_beta_ind_sigma_float(X, tX, tXX, y, tau2, sigma2, mu));
+    return rcpp_result_gen;
+END_RCPP
+}
 // NumVec_to_EigenVec
 Eigen::VectorXd NumVec_to_EigenVec(Rcpp::NumericVector& x);
 RcppExport SEXP _bnplasso_NumVec_to_EigenVec(SEXP xSEXP) {
@@ -66,6 +100,17 @@ BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::NumericVector& >::type x(xSEXP);
     rcpp_result_gen = Rcpp::wrap(NumVec_to_EigenVec(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// NumVec_to_EigenVec_float
+Eigen::VectorXf NumVec_to_EigenVec_float(const Rcpp::NumericVector& x);
+RcppExport SEXP _bnplasso_NumVec_to_EigenVec_float(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericVector& >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(NumVec_to_EigenVec_float(x));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -95,8 +140,11 @@ END_RCPP
 static const R_CallMethodDef CallEntries[] = {
     {"_bnplasso_int_sampling", (DL_FUNC) &_bnplasso_int_sampling, 3},
     {"_bnplasso_sample_beta_conj_sigma", (DL_FUNC) &_bnplasso_sample_beta_conj_sigma, 7},
+    {"_bnplasso_sample_beta_conj_sigma_float", (DL_FUNC) &_bnplasso_sample_beta_conj_sigma_float, 7},
     {"_bnplasso_sample_beta_ind_sigma", (DL_FUNC) &_bnplasso_sample_beta_ind_sigma, 7},
+    {"_bnplasso_sample_beta_ind_sigma_float", (DL_FUNC) &_bnplasso_sample_beta_ind_sigma_float, 7},
     {"_bnplasso_NumVec_to_EigenVec", (DL_FUNC) &_bnplasso_NumVec_to_EigenVec, 1},
+    {"_bnplasso_NumVec_to_EigenVec_float", (DL_FUNC) &_bnplasso_NumVec_to_EigenVec_float, 1},
     {"_bnplasso_EigenVec_to_NumVec", (DL_FUNC) &_bnplasso_EigenVec_to_NumVec, 1},
     {"_bnplasso_get_tXX", (DL_FUNC) &_bnplasso_get_tXX, 1},
     {NULL, NULL, 0}

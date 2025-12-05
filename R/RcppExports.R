@@ -9,12 +9,24 @@ sample_beta_conj_sigma <- function(X, tX, tXX, y, tau2, sigma2, mu) {
     .Call('_bnplasso_sample_beta_conj_sigma', PACKAGE = 'bnplasso', X, tX, tXX, y, tau2, sigma2, mu)
 }
 
+sample_beta_conj_sigma_float <- function(X, tX, tXX, y, tau2, sigma2, mu) {
+    .Call('_bnplasso_sample_beta_conj_sigma_float', PACKAGE = 'bnplasso', X, tX, tXX, y, tau2, sigma2, mu)
+}
+
 sample_beta_ind_sigma <- function(X, tX, tXX, y, tau2, sigma2, mu) {
     .Call('_bnplasso_sample_beta_ind_sigma', PACKAGE = 'bnplasso', X, tX, tXX, y, tau2, sigma2, mu)
 }
 
+sample_beta_ind_sigma_float <- function(X, tX, tXX, y, tau2, sigma2, mu) {
+    .Call('_bnplasso_sample_beta_ind_sigma_float', PACKAGE = 'bnplasso', X, tX, tXX, y, tau2, sigma2, mu)
+}
+
 NumVec_to_EigenVec <- function(x) {
     .Call('_bnplasso_NumVec_to_EigenVec', PACKAGE = 'bnplasso', x)
+}
+
+NumVec_to_EigenVec_float <- function(x) {
+    .Call('_bnplasso_NumVec_to_EigenVec_float', PACKAGE = 'bnplasso', x)
 }
 
 EigenVec_to_NumVec <- function(x) {

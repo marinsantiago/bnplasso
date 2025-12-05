@@ -19,8 +19,7 @@ sample_sigma2_ind_prior <- function(X, y, beta, mu, intercept) {
     shape.s2 <- (n - 1) / 2
   }
   out <- actuar::rinvgamma(1, shape = shape.s2, scale = scale.s2)
-  if (out <= 1e-08) return(1e-08) 
-  out
+  max(out, 1e-08)
 }
 
 # Sample from the full conditional distribution of sigma2, assuming a 
@@ -45,6 +44,5 @@ sample_sigma2_conj_prior <- function(X, y, beta, tau2, mu, intercept) {
     shape.s2 <- (n + p - 1) / 2
   }
   out <- actuar::rinvgamma(1, shape = shape.s2, scale = scale.s2)
-  if (out <= 1e-08) return(1e-08) 
-  out
+  max(out, 1e-08)
 }

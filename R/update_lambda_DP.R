@@ -26,7 +26,7 @@ updateDP <- function(tau2, lambda2_k, clust.indicators, a, b, alpha) {
     indicator.j <- potential_clusts[int_sampling(K.potnetial, 1, probs.j)]
     # If tau_j joins a new cluster, update lambda2 by sampling it from G_0
     if (indicator.j == (K.current + 1)) {
-      lambda2_k[indicator.j] <- rgamma(1, shape = a, rate = b) + 1e-8
+      lambda2_k[indicator.j] <- max(rgamma(1, shape = a, rate = b), 1e-08)
     }
     # Update cluster indicators
     clust.indicators[j] <- indicator.j
@@ -65,12 +65,12 @@ updateDP <- function(tau2, lambda2_k, clust.indicators, a, b, alpha) {
     n_k <- sum(idx)
     post_shape <- a + n_k
     post_rate <- b + sum(tau2[idx])/2
-    lambda2_k[k] <- rgamma(1, shape = post_shape, rate = post_rate) + 1e-8
+    lambda2_k[k] <- max(rgamma(1, shape = post_shape, rate = post_rate), 1e-08)
   }
   # If the current cluster is empty, sample lambda2_k from G_0
-  lambda2_k[idx_empty_clusters] <- rgamma(
-    length(idx_empty_clusters), shape = a, rate = b
-  ) + 1e-8
+  lambda2_k[idx_empty_clusters] <- pmax(
+    rgamma(length(idx_empty_clusters), shape = a, rate = b), 1e-08
+  )
   #K.current <- length(lambda2_k)
   #seq_p <- seq_len(p)
   #for (k in seq_len(K.current)) {
@@ -88,7 +88,8 @@ updateDP <- function(tau2, lambda2_k, clust.indicators, a, b, alpha) {
   #  }
   #}
   unique.clusts <- unique(clust.indicators)
-  lambda2_k[lambda2_k <= 1e-8] <- 1e-8
+  #lambda2_k[lambda2_k <= 1e-08] <- 1e-08
+  lambda2_k <- pmax(lambda2_k, 1e-08)
   list(
     clust.indicators = clust.indicators,
     lambda2_k = lambda2_k,
