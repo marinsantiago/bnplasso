@@ -152,9 +152,9 @@ predictive checks and residual diagnostics.
 plot(out.bnp)
 ```
 
-![](./man/figures/Rplot1.pdf) ![](./man/figures/Rplot2.pdf)
+![](./man/figures/Rplot1.png) ![](./man/figures/Rplot2.png)
 
-![](./man/figures/Rplot3.pdf) ![](./man/figures/Rplot4.pdf)
+![](./man/figures/Rplot3.png) ![](./man/figures/Rplot4.png)
 
 One can also extract the individual chains containing posterior draws from each of the model 
 parameters. For instance, let's extract and plot the chains for the intercept, beta_1, and beta_200. 
@@ -165,11 +165,11 @@ plot(out.bnp$Post.beta[,1], type = "l", ylab = "", main = "beta_1")
 plot(out.bnp$Post.beta[,200], type = "l", ylab = "", main = "beta_200")
 ```
 
-![](./man/figures/Rplot5.pdf)
+![](./man/figures/Rplot5.png)
 
-![](./man/figures/Rplot6.pdf)
+![](./man/figures/Rplot6.png)
 
-![](./man/figures/Rplot7.pdf) 
+![](./man/figures/Rplot7.png) 
 
 Note that the chains are centered around the true parameter values and exhibit good mixing!
 
@@ -180,7 +180,7 @@ two regression coefficients will be clustered together.
 bnplasso::coclust.probs(out.bnp$Post.clust_idx)
 ```
 
-![](./man/figures/Rplot8.pdf)
+![](./man/figures/Rplot8.png)
 
 Note that the first 20 regression coefficients (which are nonzero) are clustered together with large probability,
 while the remaining 180 (which are zero) are also clustered together with large probability. 
@@ -194,14 +194,14 @@ part <- bnplasso::get.partition(out.bnp$Post.clust_idx)
 
 By default, the function `get.partition()` employs the variation of information loss
 function from Wade and Ghahramani (2018). However, users can also employ 
-the Binder loss function. One can visualize this partition with the funciton 
+the Binder loss function. One can visualize this partition with the function 
 `coclust.point()`.
 
 ``` r
 bnplasso::coclust.point(part)
 ```
 
-![](./man/figures/Rplot9.pdf)
+![](./man/figures/Rplot9.png)
 
 Additional guidelines and help pages for using the package functions are available [here](https://marinsantiago.github.io/bnplasso-site/reference/index.html).
 Source code to reproduce the results from Marin et al. (2025+) are available at [https://github.com/marinsantiago/bnplasso-examples](https://github.com/marinsantiago/bnplasso-examples).
