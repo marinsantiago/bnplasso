@@ -8,7 +8,7 @@
 post.mean <- function(object) {
   chck <- !is.lmBayes(object)
   if (chck) stop("object should be of class 'lmBayes'")
-  colMeans(object$Post.beta)
+  colMeans(object$post.beta)
 }
 
 
@@ -26,7 +26,7 @@ post.mode <- function(object) {
   chck <- !is.lmBayes(object)
   if (chck) stop("object should be of class 'lmBayes'")
   n.preds <- object$n.preds
-  sapply(seq_len(n.preds), \(j) single.post.mode(object$Post.beta[,j]))
+  sapply(seq_len(n.preds), \(j) single.post.mode(object$post.beta[,j]))
 }
 
 
@@ -39,7 +39,7 @@ credinterval.criterion <- function(object, retain) {
   # .5 credible sets
   alpha_half <- 0.5 / 2
   probs <- c(alpha_half, 1 - alpha_half)
-  quant <- apply(object$Post.beta, 2, \(c) quantile(c, probs = probs))
+  quant <- apply(object$post.beta, 2, \(c) quantile(c, probs = probs))
   lower <- quant[1,]
   upper <- quant[2,]
   sapply(
@@ -49,9 +49,9 @@ credinterval.criterion <- function(object, retain) {
         0L # Exclude the variable
       } else {
         if (retain == "mean") {
-          mean(object$Post.beta[,j]) # Retain the posterior mean
+          mean(object$post.beta[,j]) # Retain the posterior mean
         } else if (retain == "mode") {
-          single.post.mode(object$Post.beta[,j]) # Retain the posterior mode
+          single.post.mode(object$post.beta[,j]) # Retain the posterior mode
         }
       }
     }
@@ -69,7 +69,7 @@ scaled.neighbor.criterion <- function(object, retain) {
   n.draws <- object$n.draws
   sapply(
     seq_len(n.preds), \(j) {
-      beta_j <- object$Post.beta[,j]
+      beta_j <- object$post.beta[,j]
       sd.beta_j <- sd(beta_j)
       bounds.beta_j <- c(-sd.beta_j, sd.beta_j)
       interval.chck <- (beta_j > bounds.beta_j[1]) & (beta_j < bounds.beta_j[2])
@@ -78,9 +78,9 @@ scaled.neighbor.criterion <- function(object, retain) {
         0L
       } else {
         if (retain == "mean") {
-          mean(object$Post.beta[,j]) # Retain the posterior mean
+          mean(object$post.beta[,j]) # Retain the posterior mean
         } else if (retain == "mode") {
-          single.post.mode(object$Post.beta[,j]) # Retain the posterior mode
+          single.post.mode(object$post.beta[,j]) # Retain the posterior mode
         }
       }
     }
@@ -139,13 +139,13 @@ point.estimates <- function(object, type = "sn", retain = "mode") {
   # Point estimates for the intercept ------------------------------------------
   if (object$intercept) {
     mu.hat <- if (type == "post.mode") {
-      single.post.mode(object$Post.mu)
+      single.post.mode(object$post.mu)
     } else if (type == "post.mean") {
-      mean(object$Post.mu)
+      mean(object$post.mu)
     } else if (retain == "mode") {
-      single.post.mode(object$Post.mu)
+      single.post.mode(object$post.mu)
     } else if (retain == "mean") {
-      mean(object$Post.mu)
+      mean(object$post.mu)
     }
     beta.hat <- c(mu.hat, beta.hat)
     names(beta.hat)[1] <- "Intercept"

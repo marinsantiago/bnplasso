@@ -58,25 +58,26 @@
 #'
 #' @return An object of S3 class, "lmBayes", containing:
 #' \itemize{
-#'   \item \code{Post.beta}: A matrix of size \code{n.draws}-by-\code{n.preds}, 
+#'   \item \code{post.beta}: A matrix of size \code{n.draws}-by-\code{n.preds}, 
 #'   where each row is a posterior draw of the regression coefficients.
-#'   \item \code{Post.sigma2}: A vector of size \code{n.draws}, where each 
+#'   \item \code{post.sigma2}: A vector of size \code{n.draws}, where each 
 #'   element is a posterior draw of the sampling variance. 
-#'   \item \code{Post.tau2}: A matrix of size \code{n.draws}-by-\code{n.preds}, 
+#'   \item \code{post.tau2}: A matrix of size \code{n.draws}-by-\code{n.preds}, 
 #'   where each row is a posterior draw of the latent parameters 
 #'   \eqn{\tau_{j}^{2}}.
-#'   \item \code{Post.lambda2}: A matrix of size 
+#'   \item \code{post.lambda2}: A matrix of size 
 #'   \code{n.draws}-by-\code{n.preds}, where each row is a posterior draw of the
 #'   shrinkage parameters \eqn{\lambda_{j}^{2}}.
-#'   \item \code{Post.clust_idx}: If \code{prior = "bnp.lasso"}, a matrix of 
+#'   \item \code{post.clust_idx}: If \code{prior = "bnp.lasso"}, a matrix of 
 #'   size \code{n.draws}-by-\code{n.preds}, where each row indicates to which 
 #'   cluster the regression coefficients belong to.
-#'   \item \code{Post.K}: If \code{prior = "bnp.lasso"}, a vector of size 
+#'   \item \code{post.K}: If \code{prior = "bnp.lasso"}, a vector of size 
 #'   \code{n.draws}, where each element indicates the number of clusters in the 
 #'   corresponding MCMC iteration.
-#'   \item \code{Post.mu}: If \code{intercept = "TRUE"}, a vector of size 
+#'   \item \code{post.mu}: If \code{intercept = "TRUE"}, a vector of size 
 #'   \code{n.draws}, where each entry is a posterior draw of the intercept term.
-#'   \item \code{elapsed}: The elapsed (wall-clock) time of the MCMC sampler.
+#'   \item \code{elapsed}: The elapsed (wall-clock) time of the MCMC sampler, 
+#'   in seconds.  
 #'   \item \code{a}: If \code{prior = "bnp.lasso"}, the \bold{shape} parameter 
 #'   in the gamma distribution used as a centering measure in the DP prior. 
 #'   If \code{prior = "b.lasso"}, the \bold{shape} parameter in the gamma 
@@ -190,7 +191,7 @@ bnplasso.lm <- function(X, y, intercept = TRUE,
   dimsX <- dim(X)
   n.obs <- dimsX[1]
   n.preds <- dimsX[2] 
-  n.draws <- nrow(bnplasso_out$Post.beta)
+  n.draws <- nrow(bnplasso_out$post.beta)
   bnplasso_out[["a"]] <- a
   bnplasso_out[["b"]] <- b
   bnplasso_out[["intercept"]] <- intercept
@@ -206,11 +207,11 @@ bnplasso.lm <- function(X, y, intercept = TRUE,
   
   # Posterior predictive fitted values and residuals ---------------------------
   # Pre-compute all linear predictors (without the intercept)
-  linPreds <- tcrossprod(X, bnplasso_out$Post.beta)
+  linPreds <- tcrossprod(X, bnplasso_out$post.beta)
   # Add the intercept if needed
   if (intercept) {
     linPreds <- linPreds + matrix(
-      data = bnplasso_out$Post.mu, nrow = nrow(linPreds),
+      data = bnplasso_out$post.mu, nrow = nrow(linPreds),
       ncol = ncol(linPreds), byrow = TRUE
     )
   }
@@ -218,7 +219,7 @@ bnplasso.lm <- function(X, y, intercept = TRUE,
   # MCMC draw and each column to an observation.
   post_pred_fits <- matrix(data = NA, nrow = n.draws, ncol = n.obs)
   loglik <- post_pred_res <- post_pred_fits
-  post_sigmas <- sqrt(pmax(abs(bnplasso_out$Post.sigma2), 1e-16))
+  post_sigmas <- sqrt(pmax(abs(bnplasso_out$post.sigma2), 1e-16))
   for (s in seq_len(n.draws)) {
     fit_val_s <- linPreds[,s] + rnorm(n.obs, 0, post_sigmas[s])
     post_pred_fits[s,] <- fit_val_s

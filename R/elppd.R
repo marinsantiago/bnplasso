@@ -50,15 +50,15 @@ elppd <- function(object, X.new, y.new) {
   # Compute elppd --------------------------------------------------------------
   
   # Pre-compute all linear predictors (without the intercept) for the new data.
-  linPreds <- tcrossprod(X.new, object$Post.beta)
+  linPreds <- tcrossprod(X.new, object$post.beta)
   # Add the intercept if needed
   if (object$intercept) {
     linPreds <- linPreds + matrix(
-      data = object$Post.mu, nrow = nrow(linPreds),
+      data = object$post.mu, nrow = nrow(linPreds),
       ncol = ncol(linPreds), byrow = TRUE
     )
   }
-  post_sigmas <- sqrt(abs(object$Post.sigma2) + 1e-16)
+  post_sigmas <- sqrt(abs(object$post.sigma2) + 1e-16)
   # log pointwise predictive density
   lppd <- sapply(
     seq_len(n.test), \(i) {

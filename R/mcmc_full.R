@@ -121,17 +121,17 @@ mcmc_sampler <- function(X, y, a, b, alpha, intercept, penalty.type,
     if (iter %% 1000 == 0) gc() # Collect cache
   }
   end <- Sys.time()
-  elapsed <- end - start
+  elapsed <- difftime(end, start, units = "secs")
   
   # Returns --------------------------------------------------------------------
   out <- list(
-    Post.beta = beta.out, Post.sigma2 = sigma2.out, 
-    Post.tau2 = tau2.out, Post.lambda2 = lambda2.out
+    post.beta = beta.out, post.sigma2 = sigma2.out, 
+    post.tau2 = tau2.out, post.lambda2 = lambda2.out
   )
-  if (intercept) out[["Post.mu"]] <- mu.out
+  if (intercept) out[["post.mu"]] <- mu.out
   if (penalty.type == "bnp.lasso") {
-    out[["Post.K"]] <- K.out
-    out[["Post.clust_idx"]] <- Clust.idx.out
+    out[["post.K"]] <- K.out
+    out[["post.clust_idx"]] <- Clust.idx.out
   }
   out[["elapsed"]] <- elapsed
   out

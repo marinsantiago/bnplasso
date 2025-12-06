@@ -16,14 +16,14 @@ coef_summary <- function(object, ...) {
   beta.names <- paste0("beta_", seq_len(object$n.preds))
   # Summary values for the intercept
   if (object$intercept) {
-    m <- object$Post.mu
+    m <- object$post.mu
     mu.summary <- rep(NA, 8)
     mu.summary[1:7] <- round(c(mean(m), sd(m), quantile(m, probs)), 3)
     mu.summary[8] <- round(coda::effectiveSize(m), 4)
   }
   # Summary values for the betas
   summary_out <- apply(
-    object$Post.beta, 2, \(b) {
+    object$post.beta, 2, \(b) {
       b.summary <- rep(NA, 8)
       b.summary[1:7] <- round(c(mean(b), sd(b), quantile(b, probs)), 3)
       b.summary[8] <- round(coda::effectiveSize(b), 4)
@@ -165,18 +165,18 @@ postpred.newdata <- function(object, X.new) {
   n.test <- nrow(X.new)
   n.draws <- object$n.draws
   # Pre-compute all linear predictors (without the intercept)
-  linPreds <- tcrossprod(X.new, object$Post.beta)
+  linPreds <- tcrossprod(X.new, object$post.beta)
   # Add the intercept if needed
   if (object$intercept) {
     linPreds <- linPreds + matrix(
-      data = object$Post.mu, nrow = nrow(linPreds),
+      data = object$post.mu, nrow = nrow(linPreds),
       ncol = ncol(linPreds), byrow = TRUE
     )
   }
   # Note: In "post_pred_fits" each row corresponds to an
   # MCMC draw and each column to a test (held-out) observation.
   post_pred_fits <- matrix(data = NA, nrow = n.draws, ncol = n.test)
-  post_sigmas <- sqrt(abs(object$Post.sigma2) + 1e-16)
+  post_sigmas <- sqrt(abs(object$post.sigma2) + 1e-16)
   for (s in seq_len(n.draws)) {
     fit_val_s <- linPreds[,s] + rnorm(n.test, 0, post_sigmas[s])
     post_pred_fits[s,] <- fit_val_s
@@ -214,13 +214,21 @@ summary.lmBayes <- function(object, ...) {
   chck <- !is.lmBayes(object)
   if (chck) stop("object should be of class 'lmBayes'")
   cat("\n"); cat("\n")
-  cat("NONPARAMETRIC BAYESIAN LASSO \n")
+  if (object$shrinakge.prior == "bnp.lasso") {
+    cat("NONPARAMETRIC BAYESIAN LASSO \n")
+  } else if (object$shrinakge.prior == "b.lasso") {
+    cat("BAYESIAN LASSO \n")
+  } else if (object$shrinakge.prior == "b.adapt.lasso") {
+    cat("BAYESIAN ADAPTIVE LASSO \n")
+  }
   cat("\n"); cat("\n")
   cat("Call details: \n")
   cat("\n")
   cat("a =", object$a, "\n")
   cat("b =", object$b, "\n")
-  cat("alpha =", object$alpha, "\n")
+  if (object$shrinakge.prior == "bnp.lasso") {
+    cat("alpha =", object$alpha, "\n")
+  }
   cat("n.obs =", object$n.obs, "\n")
   cat("n.preds =", object$n.preds, "\n")
   cat("n.draws =", object$n.draws, "(after burn-in and thinning) \n")

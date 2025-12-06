@@ -1,12 +1,12 @@
 # bnplasso 0.2.0
-  - The functions `blasso.lm()` and `balasso.lm()` have been merged into the 
-    function `bnplasso.lm()`. Thus, a new argument, called `prior`, has also 
-    been included in the function `bnplasso.lm()`. Through the argument `prior`
-    user can specify if the want a nonparametric Bayesian Lasso prior (default),
-    a Bayesian Lasso prior, or a Bayesian adaptive Lasso prior. 
-  - The `bnplasso.lm()` function now allows to make use of single point 
-    precision when executing some internal routines through the argument 
-    `float`. By default, the function still uses double point precision.
+  - The functions `blasso.lm()` and `balasso.lm()` have been merged into a
+    single function, `bnplasso.lm()`. A new argument, `prior`, has been 
+    introduced in `bnplasso.lm()` to allow users to specify the type of prior 
+    to use: a nonparametric Bayesian Lasso prior (default), a Bayesian Lasso 
+    prior, or a Bayesian adaptive Lasso prior. 
+  - The `bnplasso.lm()` function now supports single-precision floating-point 
+    calculations for certain internal routines via the `float` argument. By 
+    default, the function still uses double point precision.
   - By default, the `bnplasso.lm()` function now includes an intercept term in 
     the regression function.
   - The `bnplasso.lm()` function now returns the log-likelihood of each 
