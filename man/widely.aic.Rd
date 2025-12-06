@@ -13,7 +13,7 @@ widely.aic(object)
 The estimated WAIC.
 }
 \description{
-This function computes the Watanabe-Akaike information criterion (WAIC)
+This function computes the Watanabe–Akaike information criterion (WAIC)
 for an object of class \code{lmBayes}. The WAIC is converted into deviance 
 scale so that it is comparable with other information criteria 
 like AIC and BIC.

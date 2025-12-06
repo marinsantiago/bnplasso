@@ -309,7 +309,7 @@ Marin, S., Loong, B., and Westveld, A. H. (2025+), "Adaptive Shrinkage with a No
 
 Park, T. and Casella, G. (2008). "The Bayesian Lasso." *Journal of the American Statistical Association*, 103 (482), 681–686.
 
-Vehtari, A., Gelman, A., and Gabry, J. (2017). #Practical Bayesian model evaluation using leave-one-out
+Vehtari, A., Gelman, A., and Gabry, J. (2017). "Practical Bayesian model evaluation using leave-one-out
 cross-validation and WAIC." *Statistics and Computing* 27 1413–1432.
 
 Wade, S. and Ghahramani, Z. (2008). "Bayesian cluster analysis: Point estimation and credible balls (with discussion)." *Bayesian Analysis*, 13 (2), 559–626.
