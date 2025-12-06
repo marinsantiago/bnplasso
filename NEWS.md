@@ -1,3 +1,10 @@
+# bnplasso 0.2.1
+  - The package now includes the functions `psis.loo()` and `widely.aic()`, 
+    which compute the Pareto-smoothed importance sampling leave-one-out 
+    information criterion (PSIS-LOO) and the Watanabe–Akaike information 
+    criterion (WAIC), respectively.
+  - GitHub version: []()  
+  
 # bnplasso 0.2.0
   - The functions `blasso.lm()` and `balasso.lm()` have been merged into a
     single function, `bnplasso.lm()`. A new argument, `prior`, has been 
@@ -22,10 +29,10 @@
     probabilities and co-clustering point estimates, respectively. 
   - Other internal functionality improvements, including a better handling of 
     numerical instabilities and memory management. 
-  - GitHub version: 
+  - GitHub version: [marinsantiago/bnplasso@4cf966b]()
     
 # bnplasso 0.1.0
   - Initial release with core functionality.
   - Implementation as described in 
     <https://doi.org/10.1080/10618600.2025.2572327>
-  - GitHub version: marinsantiago/bnplasso@3c87169
+  - GitHub version: [marinsantiago/bnplasso@3c87169]()

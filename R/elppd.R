@@ -32,8 +32,7 @@
 elppd <- function(object, X.new, y.new) {
   
   # Input validation -----------------------------------------------------------
-  chck <- !is.lmBayes(object)
-  if (chck) stop("object should be of class 'lmBayes'")
+  if (!is.lmBayes(object)) stop("object should be of class 'lmBayes'")
   n.draws <- object$n.draws
   n.preds <- object$n.preds
   chck <- (!is.numeric(X.new)) || (!is.matrix(X.new))

@@ -9,7 +9,6 @@
 
 </br>
 </br>
-</br>
 
 ## Overview
 
@@ -260,6 +259,21 @@ bnplasso::elppd(out.bnp, X.test, y.test)
 -1.502845
 ```
 
+If a held-out set is not available, one can estimate the model fit using the 
+functions `psis.loo()` and `widely.aic()`, which compute the Pareto-smoothed 
+importance sampling leave-one-out information criterion (PSIS-LOO) and the 
+Watanabe–Akaike information criterion (WAIC), as in Vehtari et al. (2017).
+
+``` r
+bnplasso::psis.loo(out.bnp)
+bnplasso::widely.aic(out.bnp)
+```
+
+``` 
+713.9746
+712.7612
+```
+
 Additional guidelines and help pages for using the package functions are available [here](https://marinsantiago.github.io/bnplasso-site/reference/index.html).
 
 Source code and data to reproduce the results from Marin et al. (2025+) are available at [https://github.com/marinsantiago/bnplasso-examples](https://github.com/marinsantiago/bnplasso-examples).
@@ -294,5 +308,8 @@ Leng, C., Tran, M.-N., and Nott, D. (2014). "Bayesian Adaptive Lasso." *Annals o
 Marin, S., Loong, B., and Westveld, A. H. (2025+), "Adaptive Shrinkage with a Nonparametric Bayesian Lasso." *Journal of Computational and Graphical Statistics*. [doi:10.1080/10618600.2025.2572327](https://doi.org/10.1080/10618600.2025.2572327)
 
 Park, T. and Casella, G. (2008). "The Bayesian Lasso." *Journal of the American Statistical Association*, 103 (482), 681–686.
+
+Vehtari, A., Gelman, A., and Gabry, J. (2017). #Practical Bayesian model evaluation using leave-one-out
+cross-validation and WAIC." *Statistics and Computing* 27 1413–1432.
 
 Wade, S. and Ghahramani, Z. (2008). "Bayesian cluster analysis: Point estimation and credible balls (with discussion)." *Bayesian Analysis*, 13 (2), 559–626.

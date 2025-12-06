@@ -87,25 +87,26 @@ Default is \code{FALSE}.}
 \value{
 An object of S3 class, "lmBayes", containing:
 \itemize{
-  \item \code{Post.beta}: A matrix of size \code{n.draws}-by-\code{n.preds}, 
+  \item \code{post.beta}: A matrix of size \code{n.draws}-by-\code{n.preds}, 
   where each row is a posterior draw of the regression coefficients.
-  \item \code{Post.sigma2}: A vector of size \code{n.draws}, where each 
+  \item \code{post.sigma2}: A vector of size \code{n.draws}, where each 
   element is a posterior draw of the sampling variance. 
-  \item \code{Post.tau2}: A matrix of size \code{n.draws}-by-\code{n.preds}, 
+  \item \code{post.tau2}: A matrix of size \code{n.draws}-by-\code{n.preds}, 
   where each row is a posterior draw of the latent parameters 
   \eqn{\tau_{j}^{2}}.
-  \item \code{Post.lambda2}: A matrix of size 
+  \item \code{post.lambda2}: A matrix of size 
   \code{n.draws}-by-\code{n.preds}, where each row is a posterior draw of the
   shrinkage parameters \eqn{\lambda_{j}^{2}}.
-  \item \code{Post.clust_idx}: If \code{prior = "bnp.lasso"}, a matrix of 
+  \item \code{post.clust_idx}: If \code{prior = "bnp.lasso"}, a matrix of 
   size \code{n.draws}-by-\code{n.preds}, where each row indicates to which 
   cluster the regression coefficients belong to.
-  \item \code{Post.K}: If \code{prior = "bnp.lasso"}, a vector of size 
+  \item \code{post.K}: If \code{prior = "bnp.lasso"}, a vector of size 
   \code{n.draws}, where each element indicates the number of clusters in the 
   corresponding MCMC iteration.
-  \item \code{Post.mu}: If \code{intercept = "TRUE"}, a vector of size 
+  \item \code{post.mu}: If \code{intercept = "TRUE"}, a vector of size 
   \code{n.draws}, where each entry is a posterior draw of the intercept term.
-  \item \code{elapsed}: The elapsed (wall-clock) time of the MCMC sampler.
+  \item \code{elapsed}: The elapsed (wall-clock) time of the MCMC sampler, 
+  in seconds.  
   \item \code{a}: If \code{prior = "bnp.lasso"}, the \bold{shape} parameter 
   in the gamma distribution used as a centering measure in the DP prior. 
   If \code{prior = "b.lasso"}, the \bold{shape} parameter in the gamma 
