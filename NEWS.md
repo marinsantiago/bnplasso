@@ -3,7 +3,7 @@
     which compute the Pareto-smoothed importance sampling leave-one-out 
     information criterion (PSIS-LOO) and the Watanabe–Akaike information 
     criterion (WAIC), respectively.
-  - GitHub version: [marinsantiago/bnplasso@153db6a]()  
+  - GitHub version: [marinsantiago/bnplasso@dbe45f9]()  
   
 # bnplasso 0.2.0
   - The functions `blasso.lm()` and `balasso.lm()` have been merged into the
