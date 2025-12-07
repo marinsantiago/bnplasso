@@ -33,21 +33,14 @@ elppd <- function(object, X.new, y.new) {
   
   # Input validation -----------------------------------------------------------
   if (!is.lmBayes(object)) stop("object should be of class 'lmBayes'")
-  n.draws <- object$n.draws
+  if (not.y(y.new)) stop("y.new is not a valid numeric vector")
+  if (not.x(X.new, y.new)) stop("X.new is not a valid numeric matrix")
   n.preds <- object$n.preds
-  chck <- (!is.numeric(X.new)) || (!is.matrix(X.new))
-  if(chck) stop("X.new must be a numeric matrix.")
-  X.new.dims <- dim(X.new)
-  if(X.new.dims[2] != n.preds) stop("X.new has an incorrect number of columns.")
-  chck <- (!is.numeric(y.new)) || (!is.vector(y.new))
-  if (chck) stop("y.new must be a numeric vector.")
+  if(ncol(X.new) != n.preds) stop("X.new has an incorrect number of columns")
   n.test <- length(y.new)
-  chck <- X.new.dims[1] != n.test
-  mssg <- "Number of observations in y.new does not match the number of rows"
-  if(chck) stop(paste(mssg, "in X.new."))
+  n.draws <- object$n.draws
   
   # Compute elppd --------------------------------------------------------------
-  
   # Pre-compute all linear predictors (without the intercept) for the new data.
   linPreds <- tcrossprod(X.new, object$post.beta)
   # Add the intercept if needed

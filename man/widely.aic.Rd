@@ -7,7 +7,7 @@
 widely.aic(object)
 }
 \arguments{
-\item{object}{An object of class 'lmBayes'.}
+\item{object}{An object of class \code{'lmBayes'}.}
 }
 \value{
 The estimated WAIC.

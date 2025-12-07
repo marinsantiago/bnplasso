@@ -63,11 +63,11 @@ corresponds to the \bold{concentration} parameter in the DP prior. If
 the argument is ignored. If not provided, the function will attempt to 
 determine an appropriate value.}
 
-\item{variance.prior.type}{A character string denoting whether the variance 
+\item{variance.prior.type}{A character string denoting whether the prior 
 on the sampling variance should be an independent-type prior or a 
 conjugate-type prior. See Moran et al. (2019) for details. The options are 
 either \code{"independent"} or \code{"conjugate"}. If not provided, the 
-function will attempt to determine an appropriate value.}
+function will attempt to determine an appropriate prior.}
 
 \item{max.iters}{A positive integer corresponding to the total number of 
 MCMC iterations. Default is 6000.}
@@ -85,7 +85,7 @@ numerical accuracy. If \code{FALSE}, double point precision will be used.
 Default is \code{FALSE}.}
 }
 \value{
-An object of S3 class, "lmBayes", containing:
+An object of S3 class, \code{'lmBayes'}, containing:
 \itemize{
   \item \code{post.beta}: A matrix of size \code{n.draws}-by-\code{n.preds}, 
   where each row is a posterior draw of the regression coefficients.

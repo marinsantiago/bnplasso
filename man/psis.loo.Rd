@@ -7,9 +7,9 @@
 psis.loo(object, comp.r_eff = TRUE)
 }
 \arguments{
-\item{object}{An object of class 'lmBayes'.}
+\item{object}{An object of class \code{'lmBayes'}.}
 
-\item{comp.r_eff}{Logical. Whether the function should estimate relative 
+\item{comp.r_eff}{Logical. Whether the function should estimate the relative 
 effective sample size for the likelihood of each observation. If 
 \code{FALSE}, all the relative effective sample sizes are set to one.
 Default is \code{TRUE}.}

@@ -6,11 +6,12 @@
   - GitHub version: [marinsantiago/bnplasso@153db6a]()  
   
 # bnplasso 0.2.0
-  - The functions `blasso.lm()` and `balasso.lm()` have been merged into a
-    single function, `bnplasso.lm()`. A new argument, `prior`, has been 
-    introduced in `bnplasso.lm()` to allow users to specify the type of prior 
-    to use: a nonparametric Bayesian Lasso prior (default), a Bayesian Lasso 
-    prior, or a Bayesian adaptive Lasso prior. 
+  - The functions `blasso.lm()` and `balasso.lm()` have been merged into the
+    function, `bnplasso.lm()`. A new argument, `prior`, has been 
+    introduced in `bnplasso.lm()`, which specifies the type of shrinkage prior 
+    that should be employed. The options are: (a) a nonparametric Bayesian 
+    Lasso prior (default), (b) a Bayesian Lasso prior, or (c) a Bayesian 
+    adaptive Lasso prior. 
   - The `bnplasso.lm()` function now supports single-precision floating-point 
     calculations for certain internal routines via the `float` argument. By 
     default, the function still uses double point precision.

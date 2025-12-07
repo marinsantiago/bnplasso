@@ -9,8 +9,8 @@
 #' The PSIS-LOO is converted into deviance scale so that it is comparable 
 #' with other information criteria like AIC and BIC.
 #' 
-#' @param object An object of class 'lmBayes'.
-#' @param comp.r_eff Logical. Whether the function should estimate relative 
+#' @param object An object of class \code{'lmBayes'}.
+#' @param comp.r_eff Logical. Whether the function should estimate the relative 
 #'    effective sample size for the likelihood of each observation. If 
 #'    \code{FALSE}, all the relative effective sample sizes are set to one.
 #'    Default is \code{TRUE}.
@@ -38,7 +38,7 @@ psis.loo <- function(object, comp.r_eff = TRUE) {
 #' scale so that it is comparable with other information criteria 
 #' like AIC and BIC.
 #' 
-#' @param object An object of class 'lmBayes'.
+#' @param object An object of class \code{'lmBayes'}.
 #' 
 #' @return The estimated WAIC.
 #' 
