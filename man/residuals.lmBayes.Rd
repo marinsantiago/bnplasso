@@ -17,8 +17,8 @@ A data.frame with summary statistics of the posterior predictive
 distribution of the model residuals.
 }
 \description{
-Summary statistics of the posterior predictive distribution of the 
-residuals from an object of class \code{lmBayes}.
+Extracts the posterior predictive residuals from an object of class
+\code{lmBayes}.
 }
 \author{
 Santiago Marin

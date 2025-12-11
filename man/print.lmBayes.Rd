@@ -2,17 +2,17 @@
 % Please edit documentation in R/class_methods.R
 \name{print.lmBayes}
 \alias{print.lmBayes}
-\title{Print the results for an object of class \code{'lmBayes'}}
+\title{Print the results for an object of class \code{lmBayes}}
 \usage{
 \method{print}{lmBayes}(x, ...)
 }
 \arguments{
-\item{x}{An object of class \code{'lmBayes'}.}
+\item{x}{An object of class \code{lmBayes}.}
 
 \item{...}{Further arguments passed to.}
 }
 \description{
-Print the results for an object of class \code{'lmBayes'}
+Print the results for an object of class \code{lmBayes}
 }
 \author{
 Santiago Marin

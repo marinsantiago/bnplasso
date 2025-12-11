@@ -3,7 +3,7 @@
 \name{fitted.lmBayes}
 \alias{fitted.lmBayes}
 \alias{fitted.values.lmBayes}
-\title{Fitted Values from an object of class \code{lmBayes}}
+\title{Fitted values}
 \usage{
 \method{fitted}{lmBayes}(object, ...)
 }
@@ -14,11 +14,11 @@
 }
 \value{
 A data.frame with summary statistics of the posterior predictive 
-distribution of the fitted values.
+fitted values.
 }
 \description{
-Summary statistics of the posterior predictive distribution of the 
-fitted values from an object of class \code{lmBayes}.
+Extracts the posterior predictive fitted values from an object of class
+\code{lmBayes}.
 }
 \author{
 Santiago Marin

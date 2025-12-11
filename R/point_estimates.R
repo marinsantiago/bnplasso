@@ -91,11 +91,11 @@ scaled.neighbor.criterion <- function(object, retain) {
 # Point estimates main routine -------------------------------------------------
 
 
-#' Point estimates of the regression coefficients for an object of class 
+#' Point estimates of the regression coefficients
 #' \code{lmBayes}
 #'
-#' Compute point estimates of the regression coefficients for an object of class 
-#' \code{lmBayes}.
+#' Computes point estimates of the regression coefficients for an object of 
+#' class \code{lmBayes}.
 #'
 #' @param object An object of class 'lmBayes'.
 #' @param type A character string denoting which algorithm should be used to
@@ -111,6 +111,11 @@ scaled.neighbor.criterion <- function(object, retain) {
 #'
 #' @return A numeric vector containing the point estimates of the regression
 #' coefficients.
+#' 
+#' @references
+#'
+#' Q. Li, and N. Lin (2010), The Bayesian elastic net. \emph{Bayesian Analysis},
+#' 5(1):151-170.
 #'
 #' @author Santiago Marin
 #'

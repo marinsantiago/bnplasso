@@ -189,9 +189,9 @@ postpred.newdata <- function(object, X.new) {
 # Class specific main routines -------------------------------------------------
 
 
-#' Print the results for an object of class \code{'lmBayes'}
+#' Print the results for an object of class \code{lmBayes}
 #'
-#' @param x An object of class \code{'lmBayes'}.
+#' @param x An object of class \code{lmBayes}.
 #' @param ... Further arguments passed to.
 #' 
 #' @author Santiago Marin
@@ -203,9 +203,9 @@ print.lmBayes <- function(x, ...) {
 }
 
 
-#' Summary table of the results for an object of class \code{'lmBayes'}
+#' Summary table of the results for an object of class \code{lmBayes}
 #'
-#' @param object An object of class \code{'lmBayes'}.
+#' @param object An object of class \code{lmBayes}.
 #' @param ... Further arguments passed to.
 #' 
 #' @author Santiago Marin
@@ -265,10 +265,10 @@ plot.lmBayes <- function(x, ...) {
 }
 
 
-#' Fitted Values from an object of class \code{lmBayes} 
+#' Fitted values
 #'
-#' Summary statistics of the posterior predictive distribution of the 
-#' fitted values from an object of class \code{lmBayes}.
+#' Extracts the posterior predictive fitted values from an object of class
+#' \code{lmBayes}.
 #'
 #' @aliases fitted.values.lmBayes
 #'
@@ -276,7 +276,7 @@ plot.lmBayes <- function(x, ...) {
 #' @param ... Further arguments passed to.
 #'
 #' @return A data.frame with summary statistics of the posterior predictive 
-#' distribution of the fitted values.
+#' fitted values.
 #' 
 #' @author Santiago Marin
 #'
@@ -295,8 +295,8 @@ fitted.values.lmBayes <- fitted.lmBayes
 
 #' Residuals from an object of class \code{lmBayes}
 #'
-#' Summary statistics of the posterior predictive distribution of the 
-#' residuals from an object of class \code{lmBayes}.
+#' Extracts the posterior predictive residuals from an object of class
+#' \code{lmBayes}.
 #'
 #' @aliases resid.lmBayes
 #'
@@ -321,10 +321,10 @@ residuals.lmBayes <- function(object, ...) {
 resid.lmBayes <- residuals.lmBayes
 
 
-#' Regression coefficients from an object of class \code{lmBayes}
+#' Regression coefficients
 #'
-#' Summary statistics of the posterior distribution of the regression 
-#' coefficients from an object of class \code{lmBayes}.
+#' Extracts the posterior distribution of the regression coefficients from an
+#' object of class \code{lmBayes}.
 #'
 #' @aliases coefficients.lmBayes
 #'
