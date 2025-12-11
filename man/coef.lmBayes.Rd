@@ -3,7 +3,7 @@
 \name{coef.lmBayes}
 \alias{coef.lmBayes}
 \alias{coefficients.lmBayes}
-\title{Regression coefficients from an object of class \code{lmBayes}}
+\title{Regression coefficients}
 \usage{
 \method{coef}{lmBayes}(object, ...)
 }
@@ -17,8 +17,8 @@ A data.frame with summary statistics of the posterior distribution of
 the regression coefficients.
 }
 \description{
-Summary statistics of the posterior distribution of the regression 
-coefficients from an object of class \code{lmBayes}.
+Extracts the posterior distribution of the regression coefficients from an
+object of class \code{lmBayes}.
 }
 \author{
 Santiago Marin

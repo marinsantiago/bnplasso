@@ -2,7 +2,7 @@
 % Please edit documentation in R/point_estimates.R
 \name{point.estimates}
 \alias{point.estimates}
-\title{Point estimates of the regression coefficients for an object of class 
+\title{Point estimates of the regression coefficients
 \code{lmBayes}}
 \usage{
 point.estimates(object, type = "sn", retain = "mode")
@@ -27,8 +27,12 @@ A numeric vector containing the point estimates of the regression
 coefficients.
 }
 \description{
-Compute point estimates of the regression coefficients for an object of class 
-\code{lmBayes}.
+Computes point estimates of the regression coefficients for an object of 
+class \code{lmBayes}.
+}
+\references{
+Q. Li, and N. Lin (2010), The Bayesian elastic net. \emph{Bayesian Analysis},
+5(1):151-170.
 }
 \author{
 Santiago Marin
