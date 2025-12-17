@@ -363,7 +363,7 @@ plot.lmBayes <- function(x, ...) {
 
 #' Plot the results and diagnostics for an object of class \code{spmBayes}
 #'
-#' Produces posterior predictive and residual diagnostic plots for an object of 
+#' Produces posterior predictive diagnostic plots for an object of 
 #' class \code{'spmBayes'}.
 #'
 #' @param x An object of class \code{'spmBayes'}.

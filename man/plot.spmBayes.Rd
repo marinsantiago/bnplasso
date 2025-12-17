@@ -12,7 +12,7 @@
 \item{...}{Further arguments passed to.}
 }
 \description{
-Produces posterior predictive and residual diagnostic plots for an object of 
+Produces posterior predictive diagnostic plots for an object of 
 class \code{'spmBayes'}.
 }
 \author{
