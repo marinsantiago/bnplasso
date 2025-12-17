@@ -7,19 +7,22 @@
 # Checks if an object inherits from "lmBayes".
 is.lmBayes <- \(object) inherits(object, "lmBayes")
 
+# Checks if an object inherits from "spmBayes".
+is.spmBayes <- \(object) inherits(object, "spmBayes")
+
 # Summary table for regression coefficients
 coef_summary <- function(object, ...) {
-  chck <- !is.lmBayes(object)
-  if (chck) stop("object should be of class 'lmBayes'")
   probs <- c(0.025, 0.25, 0.5, 0.75, 0.975)
   summary.values <- c("mean", "sd", paste0(probs * 100, "%"), "n_eff")
   beta.names <- paste0("beta_", seq_len(object$n.preds))
   # Summary values for the intercept
-  if (object$intercept) {
-    m <- object$post.mu
-    mu.summary <- rep(NA, 8)
-    mu.summary[1:7] <- round(c(mean(m), sd(m), quantile(m, probs)), 3)
-    mu.summary[8] <- round(coda::effectiveSize(m), 4)
+  if (!is.spmBayes(object)) {
+    if (object$intercept) {
+      m <- object$post.mu
+      mu.summary <- rep(NA, 8)
+      mu.summary[1:7] <- round(c(mean(m), sd(m), quantile(m, probs)), 3)
+      mu.summary[8] <- round(coda::effectiveSize(m), 4)
+    }
   }
   # Summary values for the betas
   summary_out <- apply(
@@ -31,12 +34,14 @@ coef_summary <- function(object, ...) {
     }
   ) |> t()
   # Prepare the returns
-  if (object$intercept) {
-    summary_out <- rbind(mu.summary, summary_out)
-    row.names(summary_out) <- c("Intercept", beta.names)
-  } else {
-    row.names(summary_out) <- beta.names
-  }
+  if (!is.spmBayes(object)) {
+    if (object$intercept) {
+      summary_out <- rbind(mu.summary, summary_out)
+      row.names(summary_out) <- c("Intercept", beta.names)
+    } else {
+      row.names(summary_out) <- beta.names
+    }
+  } else { row.names(summary_out) <- beta.names }
   colnames(summary_out) <- summary.values
   summary_out
 }
@@ -44,10 +49,10 @@ coef_summary <- function(object, ...) {
 
 # Posterior predictive checks - density plot
 postpred.chck.plt <- function(object, ...) {
-  chck <- !is.lmBayes(object)
-  if (chck) stop("object should be of class 'lmBayes'")
   n.draws <- object$n.draws
-  fitted.vals <- object$post.pred.fitted.values
+  fitted.vals <- if (!is.spmBayes(object)) {
+    object$post.pred.fitted.values
+  } else { object$post.pred }
   x_range <- density(object$y)$x
   x_eval <- seq(x_range[1], x_range[length(x_range)], length.out = 1000)
   y_eval <- matrix(NA, nrow = n.draws, ncol = 1000)
@@ -84,9 +89,9 @@ postpred.chck.plt <- function(object, ...) {
 
 # Posterior predictive checks - sample statistics plot
 postpred.samplestats.plt <- function(object, ...) {
-  chck <- !is.lmBayes(object)
-  if (chck) stop("object should be of class 'lmBayes'")
-  fitted.vals <- object$post.pred.fitted.values
+  fitted.vals <- if (!is.spmBayes(object)) {
+    object$post.pred.fitted.values
+  } else { object$post.pred }
   postpred.stats <- apply(fitted.vals, 1, \(m) c(mean(m), sd(m)))
   observed.stats <- c(mean(object$y), sd(object$y))
   pp <- "Posterior predictive "
@@ -131,8 +136,6 @@ postpred.samplestats.plt <- function(object, ...) {
 
 # Residual checks plot
 res.chck.plt <- function(object, ...) {
-  chck <- !is.lmBayes(object)
-  if (chck) stop("object should be of class 'lmBayes'")
   med.res <- apply(object$post.pred.residuals, 2, \(m) median(m, na.rm = T))
   med.fv <- apply(object$post.pred.fitted.values, 2, \(m) median(m, na.rm = T))
   # Internally studentized residuals
@@ -185,6 +188,67 @@ postpred.newdata <- function(object, X.new) {
   post_pred_fits
 }
 
+# Common internal routines for "lmBayes" and "spmBayes" ------------------------
+
+.print_common <- function(x) coef_summary(x)
+
+.coef_common <- function(x) as.data.frame(coef_summary(x)[,-8])
+
+.summary_common <- function(x) {
+  if (!is.spmBayes(x)) {
+    cat("\n"); cat("\n")
+    cat("LINEAR REGRESSION MODEL \n")
+  } else {
+    cat("\n"); cat("\n")
+    cat("SPARSE MEANS PROBLEM \n")
+  }
+  cat("\n"); cat("\n")
+  if (x$shrinakge.prior == "bnp.lasso") {
+    cat("NONPARAMETRIC BAYESIAN LASSO \n")
+  } else if (x$shrinakge.prior == "b.lasso") {
+    cat("BAYESIAN LASSO \n")
+  } else if (x$shrinakge.prior == "b.adapt.lasso") {
+    cat("BAYESIAN ADAPTIVE LASSO \n")
+  }
+  cat("\n"); cat("\n")
+  cat("Call details: \n")
+  cat("\n")
+  cat("a =", x$a, "\n")
+  cat("b =", x$b, "\n")
+  if (x$shrinakge.prior == "bnp.lasso") {
+    cat("alpha =", x$alpha, "\n")
+  }
+  cat("n.obs =", x$n.obs, "\n")
+  cat("n.preds =", x$n.preds, "\n")
+  cat("n.draws =", x$n.draws, "(after burn-in and thinning) \n")
+  cat("elapsed =", format(x$elapsed), "\n")
+  cat("\n")
+  cat("Coefficients: \n")
+  coef_summary(x) 
+}
+
+.plot_common <- function(x) {
+  # Posterior predictive checks - density plot
+  postpred.chck.plt(x)
+  readline(prompt = "Press [Enter] to continue...")
+  cat()
+  # Posterior predictive checks - sample statistics plot
+  postpred.samplestats.plt(x)
+  # Residual checks plot
+  if (!is.spmBayes(x)) {
+    readline(prompt = "Press [Enter] to continue...")
+    cat()
+    res.chck.plt(x)
+  }
+}
+
+.fitted_common <- function(x) {
+  probs <- c(0.025, 0.25, 0.5, 0.75, 0.975)
+  fv <- if (!is.spmBayes(x)) x$post.pred.fitted.values else x$post.pred
+  fv_summary <- apply(fv, 2, \(m) c(mean(m), sd(m), quantile(m, probs))) |> t()
+  colnames(fv_summary) <- c("mean", "sd", paste0(probs * 100, "%"))
+  as.data.frame(fv_summary)
+}
 
 # Class specific main routines -------------------------------------------------
 
@@ -197,9 +261,20 @@ postpred.newdata <- function(object, X.new) {
 #' @author Santiago Marin
 #'
 print.lmBayes <- function(x, ...) {
-  chck <- !is.lmBayes(x)
-  if (chck) stop("object should be of class 'lmBayes'")
-  coef_summary(x)
+  if (!is.lmBayes(x)) stop("x should be of class 'lmBayes'")
+  .print_common(x)
+}
+
+#' Print the results for an object of class \code{spmBayes}
+#'
+#' @param x An object of class \code{spmBayes}.
+#' @param ... Further arguments passed to.
+#' 
+#' @author Santiago Marin
+#'
+print.spmBayes <- function(x, ...) {
+  if (!is.spmBayes(x)) stop("x should be of class 'spmBayes'")
+  .print_common(x)
 }
 
 
@@ -211,32 +286,64 @@ print.lmBayes <- function(x, ...) {
 #' @author Santiago Marin
 #'
 summary.lmBayes <- function(object, ...) {
-  chck <- !is.lmBayes(object)
-  if (chck) stop("object should be of class 'lmBayes'")
-  cat("\n"); cat("\n")
-  if (object$shrinakge.prior == "bnp.lasso") {
-    cat("NONPARAMETRIC BAYESIAN LASSO \n")
-  } else if (object$shrinakge.prior == "b.lasso") {
-    cat("BAYESIAN LASSO \n")
-  } else if (object$shrinakge.prior == "b.adapt.lasso") {
-    cat("BAYESIAN ADAPTIVE LASSO \n")
-  }
-  cat("\n"); cat("\n")
-  cat("Call details: \n")
-  cat("\n")
-  cat("a =", object$a, "\n")
-  cat("b =", object$b, "\n")
-  if (object$shrinakge.prior == "bnp.lasso") {
-    cat("alpha =", object$alpha, "\n")
-  }
-  cat("n.obs =", object$n.obs, "\n")
-  cat("n.preds =", object$n.preds, "\n")
-  cat("n.draws =", object$n.draws, "(after burn-in and thinning) \n")
-  cat("elapsed =", format(object$elapsed), "\n")
-  cat("\n")
-  cat("Coefficients: \n")
-  coef_summary(object) 
+  if (!is.lmBayes(object)) stop("object should be of class 'lmBayes'")
+  .summary_common(object)
 }
+
+#' Summary table of the results for an object of class \code{spmBayes}
+#'
+#' @param object An object of class \code{spmBayes}.
+#' @param ... Further arguments passed to.
+#' 
+#' @author Santiago Marin
+#'
+summary.spmBayes <- function(object, ...) {
+  if (!is.spmBayes(object)) stop("object should be of class 'spmBayes'")
+  .summary_common(object)
+}
+
+
+#' Regression coefficients
+#'
+#' Extracts the posterior distribution of the regression coefficients from an
+#' object of class \code{lmBayes}.
+#'
+#' @aliases coefficients.lmBayes
+#'
+#' @param object An object of class \code{'lmBayes'}.
+#' @param ... Further arguments passed to.
+#'
+#' @return A data.frame with summary statistics of the posterior distribution of
+#' the regression coefficients.
+#' 
+#' @author Santiago Marin
+#'
+coef.lmBayes <- function(object, ...) {
+  if (!is.lmBayes(object)) stop("object should be of class 'lmBayes'")
+  .coef_common(object)
+}
+coefficients.lmBayes <- coef.lmBayes
+
+#' Mean parameters
+#'
+#' Extracts the posterior distribution of the mean parameters from an
+#' object of class \code{spmBayes}.
+#'
+#' @aliases coefficients.spmBayes
+#'
+#' @param object An object of class \code{'spmBayes'}.
+#' @param ... Further arguments passed to.
+#'
+#' @return A data.frame with summary statistics of the posterior distribution of
+#' the mean parameters.
+#' 
+#' @author Santiago Marin
+#'
+coef.spmBayes <- function(object, ...) {
+  if (!is.spmBayes(object)) stop("object should be of class 'spmBayes'")
+  .coef_common(object)
+}
+coefficients.spmBayes <- coef.spmBayes
 
 
 #' Plot the results and diagnostics for an object of class \code{lmBayes}
@@ -250,18 +357,23 @@ summary.lmBayes <- function(object, ...) {
 #' @author Santiago Marin
 #'
 plot.lmBayes <- function(x, ...) {
-  chck <- !is.lmBayes(x)
-  if (chck) stop("object should be of class 'lmBayes'")
-  # Posterior predictive checks - density plot
-  postpred.chck.plt(x)
-  readline(prompt = "Press [Enter] to continue...")
-  cat()
-  # Posterior predictive checks - sample statistics plot
-  postpred.samplestats.plt(x)
-  readline(prompt = "Press [Enter] to continue...")
-  cat()
-  # Residual checks plot
-  res.chck.plt(x)
+  if (!is.lmBayes(x)) stop("x should be of class 'lmBayes'")
+  .plot_common(x)
+}
+
+#' Plot the results and diagnostics for an object of class \code{spmBayes}
+#'
+#' Produces posterior predictive and residual diagnostic plots for an object of 
+#' class \code{'spmBayes'}.
+#'
+#' @param x An object of class \code{'spmBayes'}.
+#' @param ... Further arguments passed to.
+#' 
+#' @author Santiago Marin
+#'
+plot.spmBayes <- function(x, ...) {
+  if (!is.spmBayes(x)) stop("x should be of class 'spmBayes'")
+  .plot_common(x)
 }
 
 
@@ -281,16 +393,31 @@ plot.lmBayes <- function(x, ...) {
 #' @author Santiago Marin
 #'
 fitted.lmBayes <- function(object, ...) {
-  chck <- !is.lmBayes(object)
-  if (chck) stop("object should be of class 'lmBayes'")
-  probs <- c(0.025, 0.25, 0.5, 0.75, 0.975)
-  fitted.summary <- apply(object$post.pred.fitted.values, 2, \(m) {
-    c(mean(m), sd(m), quantile(m, probs))
-  }) |> t()
-  colnames(fitted.summary) <- c("mean", "sd", paste0(probs * 100, "%"))
-  as.data.frame(fitted.summary)
+  if (!is.lmBayes(object)) stop("object should be of class 'lmBayes'")
+  .fitted_common(object)
 }
 fitted.values.lmBayes <- fitted.lmBayes
+
+#' Fitted values
+#'
+#' Extracts the posterior predictive fitted values from an object of class
+#' \code{spmBayes}.
+#'
+#' @aliases fitted.values.spmBayes
+#'
+#' @param object An object of class \code{'spmBayes'}.
+#' @param ... Further arguments passed to.
+#'
+#' @return A data.frame with summary statistics of the posterior predictive 
+#' fitted values.
+#' 
+#' @author Santiago Marin
+#'
+fitted.spmBayes <- function(object, ...) {
+  if (!is.spmBayes(object)) stop("object should be of class 'lmBayes'")
+  .fitted_common(object)
+}
+fitted.values.spmBayes <- fitted.spmBayes
 
 
 #' Residuals from an object of class \code{lmBayes}
@@ -319,31 +446,6 @@ residuals.lmBayes <- function(object, ...) {
   as.data.frame(res.summary)
 }
 resid.lmBayes <- residuals.lmBayes
-
-
-#' Regression coefficients
-#'
-#' Extracts the posterior distribution of the regression coefficients from an
-#' object of class \code{lmBayes}.
-#'
-#' @aliases coefficients.lmBayes
-#'
-#' @param object An object of class \code{'lmBayes'}.
-#' @param ... Further arguments passed to.
-#'
-#' @return A data.frame with summary statistics of the posterior distribution of
-#' the regression coefficients.
-#' 
-#' @author Santiago Marin
-#'
-coef.lmBayes <- function(object, ...) {
-  chck <- !is.lmBayes(object)
-  if (chck) stop("object should be of class 'lmBayes'")
-  out <- coef_summary(object)
-  out <- out[,-8]
-  as.data.frame(out)
-}
-coefficients.lmBayes <- coef.lmBayes
 
 
 #' Posterior predictive distribution for new data

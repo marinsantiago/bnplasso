@@ -5,12 +5,7 @@
 # Point estimate helpers -------------------------------------------------------
 
 # Compute the posterior mean for all the regression coefficients
-post.mean <- function(object) {
-  chck <- !is.lmBayes(object)
-  if (chck) stop("object should be of class 'lmBayes'")
-  colMeans(object$post.beta)
-}
-
+post.mean <- function(object) colMeans(object$post.beta)
 
 # Compute the posterior mode for a sequence of posterior draws
 single.post.mode <- function(x) {
@@ -20,21 +15,15 @@ single.post.mode <- function(x) {
   x_eval[which.max(dens.eval)]
 }
 
-
 # Compute the posterior mode for all the regression coefficients
 post.mode <- function(object) {
-  chck <- !is.lmBayes(object)
-  if (chck) stop("object should be of class 'lmBayes'")
   n.preds <- object$n.preds
   sapply(seq_len(n.preds), \(j) single.post.mode(object$post.beta[,j]))
 }
 
-
 # If the 50% credible interval contains zero, remove the predictor. Otherwise,
 # retain either the posterior mode or the posterior mean.
 credinterval.criterion <- function(object, retain) {
-  chck <- !is.lmBayes(object)
-  if (chck) stop("object should be of class 'lmBayes'")
   n.preds <- object$n.preds
   # .5 credible sets
   alpha_half <- 0.5 / 2
@@ -58,13 +47,10 @@ credinterval.criterion <- function(object, retain) {
   )
 }
 
-
 # If the posterior probability of beta_j being in the scaled neighborhood 
 # from Li and Lin (2010) is larger than 0.5, remove the predictor. Otherwise, 
 # retain either the posterior mode or the posterior mean.
 scaled.neighbor.criterion <- function(object, retain) {
-  chck <- !is.lmBayes(object)
-  if (chck) stop("object should be of class 'lmBayes'")
   n.preds <- object$n.preds
   n.draws <- object$n.draws
   sapply(
@@ -92,12 +78,11 @@ scaled.neighbor.criterion <- function(object, retain) {
 
 
 #' Point estimates of the regression coefficients
-#' \code{lmBayes}
 #'
 #' Computes point estimates of the regression coefficients for an object of 
-#' class \code{lmBayes}.
+#' class \code{lmBayes} or \code{'spmBayes'}.
 #'
-#' @param object An object of class 'lmBayes'.
+#' @param object An object of class \code{'lmBayes'} or \code{'spmBayes'}.
 #' @param type A character string denoting which algorithm should be used to
 #'   recover the point estimates. The options are: (i) \code{"sn"} for the
 #'   scaled neighborhood criterion from Li and Lin (2010), (ii) 
@@ -119,15 +104,16 @@ scaled.neighbor.criterion <- function(object, retain) {
 #'
 #' @author Santiago Marin
 #'
-point.estimates <- function(object, type = "sn", retain = "mode") {
+point.estimates <- function(object, type = "sn", retain = "mean") {
   # Input validation -----------------------------------------------------------
-  chck <- !is.lmBayes(object)
-  if (chck) stop("object should be of class 'lmBayes'")
+  if (!is.lmBayes(object) & !is.spmBayes(object)) {
+    stop("object should be of class 'lmBayes' or 'spmBayes'")
+  }
   chck <- !(type %in% c("sn", "cred.int", "post.mode", "post.mean"))
-  mssg <- "type must be either 'sn', 'cred.int', 'post.mode', or 'post.mean'."
+  mssg <- "type must be either 'sn', 'cred.int', 'post.mode', or 'post.mean'"
   if (chck) stop(mssg)
   chck <- !(retain %in% c("mode", "mean"))
-  if (chck) stop("retain must be either 'mode' or 'mean'.")
+  if (chck) stop("retain must be either 'mode' or 'mean'")
   
   # Point estimates for beta ---------------------------------------------------
   beta.hat <- if (type == "sn") {
@@ -142,18 +128,20 @@ point.estimates <- function(object, type = "sn", retain = "mode") {
   names(beta.hat) <- paste0("beta_", seq_len(object$n.preds))
 
   # Point estimates for the intercept ------------------------------------------
-  if (object$intercept) {
-    mu.hat <- if (type == "post.mode") {
-      single.post.mode(object$post.mu)
-    } else if (type == "post.mean") {
-      mean(object$post.mu)
-    } else if (retain == "mode") {
-      single.post.mode(object$post.mu)
-    } else if (retain == "mean") {
-      mean(object$post.mu)
+  if (!is.spmBayes(object)) {
+    if (object$intercept) {
+      mu.hat <- if (type == "post.mode") {
+        single.post.mode(object$post.mu)
+      } else if (type == "post.mean") {
+        mean(object$post.mu)
+      } else if (retain == "mode") {
+        single.post.mode(object$post.mu)
+      } else if (retain == "mean") {
+        mean(object$post.mu)
+      }
+      beta.hat <- c(mu.hat, beta.hat)
+      names(beta.hat)[1] <- "Intercept"
     }
-    beta.hat <- c(mu.hat, beta.hat)
-    names(beta.hat)[1] <- "Intercept"
   }
   beta.hat
 }

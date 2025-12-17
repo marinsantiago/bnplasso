@@ -58,6 +58,25 @@ Rcpp::NumericVector EigenVec_to_NumVec(const Eigen::VectorXd & x) {
 
 
 /**
+ * Function to convert an Eigen::VectorXf (float) into an Rcpp::NumericVector  \ 
+ *                                                                             \
+ * @param x Eigen::VectorXf: A (float) vector to convert into an               \
+ *  Rcpp::NumericVector                                                        \
+ *                                                                             \
+ * @return Rcpp::NumericVector: Converted vector.                              \
+ */
+// [[Rcpp::export]]
+Rcpp::NumericVector EigenVecFloat_to_NumVec(const Eigen::VectorXf & x) {
+  Rcpp::NumericVector out = Rcpp::no_init_vector(x.size());
+  // Map R's vector as an Eigen double vector without allocating new memory
+  Eigen::Map<Eigen::VectorXd> out_map(out.begin(), x.size());
+  // Single pass conversion; Eigen will vectorize when possible
+  out_map = x.cast<double>();
+  return out;
+}
+
+
+/**
  *                                                                             \
  * Function to compute the cross-product t(X) %*% X                            \ 
  *                                                                             \

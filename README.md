@@ -95,8 +95,8 @@ Finally, let's generate the responses.
 
 ``` r
 set.seed(1)
-y.train <- mu + X.train %*% beta + rnorm(n.train, 0, sigma)
-y.test <- mu + X.test %*% beta + rnorm(n.test, 0, sigma)
+y.train <- as.vector(mu + X.train %*% beta + rnorm(n.train, 0, sigma))
+y.test <- as.vector(mu + X.test %*% beta + rnorm(n.test, 0, sigma))
 ```
 
 We can then easily apply the nonparametric Bayesian Lasso (Marin et al., 2025+) to these data 
@@ -120,6 +120,9 @@ summary(out.bnp)
 
 
 ```
+LINEAR REGRESSION MODEL 
+
+
 NONPARAMETRIC BAYESIAN LASSO 
 
 
@@ -131,7 +134,7 @@ alpha = 0.4014365
 n.obs = 250 
 n.preds = 200 
 n.draws = 5000 (after burn-in and thinning) 
-elapsed = 11.53845 secs 
+elapsed = 10.58291 secs 
 
 Coefficients: 
             mean    sd   2.5%    25%    50%    75%  97.5%     n_eff
@@ -140,6 +143,7 @@ beta_1     4.931 0.086  4.767  4.873  4.929  4.990  5.103 5000.0000
 beta_2     5.114 0.108  4.897  5.042  5.112  5.188  5.323 5000.0000
 beta_3     5.003 0.111  4.790  4.928  5.004  5.077  5.216 3759.5150
 beta_4     5.114 0.107  4.904  5.041  5.115  5.185  5.325 4162.1842
+beta_5     4.737 0.107  4.525  4.665  4.738  4.809  4.944 5000.0000
 ⋮
 ```
 It includes details about the function call, as well as the posterior mean, 

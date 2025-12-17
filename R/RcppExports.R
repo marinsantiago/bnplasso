@@ -21,6 +21,14 @@ sample_beta_ind_sigma_float <- function(X, tX, tXX, y, tau2, sigma2, mu) {
     .Call('_bnplasso_sample_beta_ind_sigma_float', PACKAGE = 'bnplasso', X, tX, tXX, y, tau2, sigma2, mu)
 }
 
+step2_blockedGibbs_dbl <- function(tau2, lambda2_all, omega, K) {
+    .Call('_bnplasso_step2_blockedGibbs_dbl', PACKAGE = 'bnplasso', tau2, lambda2_all, omega, K)
+}
+
+step2_blockedGibbs_flt <- function(tau2, lambda2_all, omega, K) {
+    .Call('_bnplasso_step2_blockedGibbs_flt', PACKAGE = 'bnplasso', tau2, lambda2_all, omega, K)
+}
+
 NumVec_to_EigenVec <- function(x) {
     .Call('_bnplasso_NumVec_to_EigenVec', PACKAGE = 'bnplasso', x)
 }
@@ -31,6 +39,10 @@ NumVec_to_EigenVec_float <- function(x) {
 
 EigenVec_to_NumVec <- function(x) {
     .Call('_bnplasso_EigenVec_to_NumVec', PACKAGE = 'bnplasso', x)
+}
+
+EigenVecFloat_to_NumVec <- function(x) {
+    .Call('_bnplasso_EigenVecFloat_to_NumVec', PACKAGE = 'bnplasso', x)
 }
 
 get_tXX <- function(X) {
