@@ -7,7 +7,7 @@
 psis.loo(object, comp.r_eff = TRUE)
 }
 \arguments{
-\item{object}{An object of class \code{'lmBayes'}.}
+\item{object}{An object of class \code{'lmBayes'} or \code{'spmBayes'}.}
 
 \item{comp.r_eff}{Logical. Whether the function should estimate the relative 
 effective sample size for the likelihood of each observation. If 
@@ -19,9 +19,9 @@ The estimated PSIS-LOO.
 }
 \description{
 This function computes the Pareto-smoothed importance sampling leave-one-out 
-information criterion (PSIS-LOO) for an object of class \code{lmBayes}. 
-The PSIS-LOO is converted into deviance scale so that it is comparable 
-with other information criteria like AIC and BIC.
+information criterion (PSIS-LOO) for an object of class \code{lmBayes} or 
+\code{spmBayes}. The PSIS-LOO is converted into deviance scale so that it is 
+comparable with other information criteria like AIC and BIC.
 }
 \author{
 Santiago Marin

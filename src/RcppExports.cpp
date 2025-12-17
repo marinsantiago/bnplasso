@@ -92,6 +92,34 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// step2_blockedGibbs_dbl
+Rcpp::IntegerVector step2_blockedGibbs_dbl(const Eigen::VectorXd& tau2, const Eigen::VectorXd& lambda2_all, const Eigen::VectorXd& omega, const int K);
+RcppExport SEXP _bnplasso_step2_blockedGibbs_dbl(SEXP tau2SEXP, SEXP lambda2_allSEXP, SEXP omegaSEXP, SEXP KSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const Eigen::VectorXd& >::type tau2(tau2SEXP);
+    Rcpp::traits::input_parameter< const Eigen::VectorXd& >::type lambda2_all(lambda2_allSEXP);
+    Rcpp::traits::input_parameter< const Eigen::VectorXd& >::type omega(omegaSEXP);
+    Rcpp::traits::input_parameter< const int >::type K(KSEXP);
+    rcpp_result_gen = Rcpp::wrap(step2_blockedGibbs_dbl(tau2, lambda2_all, omega, K));
+    return rcpp_result_gen;
+END_RCPP
+}
+// step2_blockedGibbs_flt
+Rcpp::IntegerVector step2_blockedGibbs_flt(const Eigen::VectorXf& tau2, const Eigen::VectorXf& lambda2_all, const Eigen::VectorXf& omega, const int K);
+RcppExport SEXP _bnplasso_step2_blockedGibbs_flt(SEXP tau2SEXP, SEXP lambda2_allSEXP, SEXP omegaSEXP, SEXP KSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const Eigen::VectorXf& >::type tau2(tau2SEXP);
+    Rcpp::traits::input_parameter< const Eigen::VectorXf& >::type lambda2_all(lambda2_allSEXP);
+    Rcpp::traits::input_parameter< const Eigen::VectorXf& >::type omega(omegaSEXP);
+    Rcpp::traits::input_parameter< const int >::type K(KSEXP);
+    rcpp_result_gen = Rcpp::wrap(step2_blockedGibbs_flt(tau2, lambda2_all, omega, K));
+    return rcpp_result_gen;
+END_RCPP
+}
 // NumVec_to_EigenVec
 Eigen::VectorXd NumVec_to_EigenVec(Rcpp::NumericVector& x);
 RcppExport SEXP _bnplasso_NumVec_to_EigenVec(SEXP xSEXP) {
@@ -125,6 +153,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// EigenVecFloat_to_NumVec
+Rcpp::NumericVector EigenVecFloat_to_NumVec(const Eigen::VectorXf& x);
+RcppExport SEXP _bnplasso_EigenVecFloat_to_NumVec(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const Eigen::VectorXf& >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(EigenVecFloat_to_NumVec(x));
+    return rcpp_result_gen;
+END_RCPP
+}
 // get_tXX
 Eigen::MatrixXd get_tXX(const Eigen::MatrixXd& X);
 RcppExport SEXP _bnplasso_get_tXX(SEXP XSEXP) {
@@ -143,9 +182,12 @@ static const R_CallMethodDef CallEntries[] = {
     {"_bnplasso_sample_beta_conj_sigma_float", (DL_FUNC) &_bnplasso_sample_beta_conj_sigma_float, 7},
     {"_bnplasso_sample_beta_ind_sigma", (DL_FUNC) &_bnplasso_sample_beta_ind_sigma, 7},
     {"_bnplasso_sample_beta_ind_sigma_float", (DL_FUNC) &_bnplasso_sample_beta_ind_sigma_float, 7},
+    {"_bnplasso_step2_blockedGibbs_dbl", (DL_FUNC) &_bnplasso_step2_blockedGibbs_dbl, 4},
+    {"_bnplasso_step2_blockedGibbs_flt", (DL_FUNC) &_bnplasso_step2_blockedGibbs_flt, 4},
     {"_bnplasso_NumVec_to_EigenVec", (DL_FUNC) &_bnplasso_NumVec_to_EigenVec, 1},
     {"_bnplasso_NumVec_to_EigenVec_float", (DL_FUNC) &_bnplasso_NumVec_to_EigenVec_float, 1},
     {"_bnplasso_EigenVec_to_NumVec", (DL_FUNC) &_bnplasso_EigenVec_to_NumVec, 1},
+    {"_bnplasso_EigenVecFloat_to_NumVec", (DL_FUNC) &_bnplasso_EigenVecFloat_to_NumVec, 1},
     {"_bnplasso_get_tXX", (DL_FUNC) &_bnplasso_get_tXX, 1},
     {NULL, NULL, 0}
 };

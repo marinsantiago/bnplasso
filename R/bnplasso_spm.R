@@ -1,15 +1,9 @@
-#' Fit linear regression models with a nonparametric Bayesian Lasso prior
+#' Fit sparse means models with a nonparametric Bayesian Lasso prior
 #'
-#' This function fits linear regression models with a nonparametric 
-#' Bayesian Lasso prior as in Marin et al. (2025+).
+#' This function fits sparse means models with a nonparametric 
+#' Bayesian Lasso prior (Marin et al., 2025+).
 #'
-#' @param X A matrix of predictors of dimension \eqn{n}-by-\eqn{p}, where each 
-#'   of the \eqn{n} rows is an observation vector.
 #' @param y Response variable. It should be a numeric vector size \eqn{n}.
-#' @param intercept Logical. If \code{TRUE}, an intercept term is included in 
-#'   the model; otherwise, the intercept is integrated out. If \code{TRUE}, the 
-#'   prior on the intercept would be a non-informative prior of the form 
-#'   \eqn{p(\mu)\propto 1}. Default is \code{TRUE}. 
 #' @param prior A character string denoting which type of shrinkage prior
 #'   should be employed. The options are either: (1) \code{"bnp.lasso"} which
 #'   implements the nonparametric Bayesian Lasso as in Marin et al. (2025+), 
@@ -54,14 +48,14 @@
 #' @param polya logical. Whether a generalized Pólya urn sampling scheme or a 
 #'   blocked Gibbs sampling scheme should be employed to update the Dirichlet 
 #'   process mixture in the MCMC algorithm. If \code{TRUE}, a generalized 
-#'   Pólya urn sampling scheme would be used. Default is \code{TRUE}. 
+#'   Pólya urn sampling scheme would be used. Default is \code{FALSE}. 
 #'   Important: This argument is ignored if \code{prior != "bnp.lasso"}
 #' @param float Logical. If \code{TRUE}, some internal routines will use single 
 #'   point precision for improved computational efficiency at the expense of 
 #'   numerical accuracy. If \code{FALSE}, double point precision will be used. 
 #'   Default is \code{FALSE}.
 #'
-#' @return An object of S3 class, \code{'lmBayes'}, containing:
+#' @return An object of S3 class, \code{'spmBayes'}, containing:
 #' \itemize{
 #'   \item \code{post.beta}: A matrix of size \code{n.draws}-by-\code{n.preds}, 
 #'   where each row is a posterior draw of the regression coefficients.
@@ -79,8 +73,6 @@
 #'   \item \code{post.K}: If \code{prior = "bnp.lasso"}, a vector of size 
 #'   \code{n.draws}, where each element indicates the number of clusters in the 
 #'   corresponding MCMC iteration.
-#'   \item \code{post.mu}: If \code{intercept = "TRUE"}, a vector of size 
-#'   \code{n.draws}, where each entry is a posterior draw of the intercept term.
 #'   \item \code{elapsed}: The elapsed (wall-clock) time of the MCMC sampler, 
 #'   in seconds.  
 #'   \item \code{a}: If \code{prior = "bnp.lasso"}, the \bold{shape} parameter 
@@ -99,7 +91,6 @@
 #'   \eqn{\lambda_{j}^{2}}, for \eqn{j\in\{1,\dots,p\}}.
 #'   \item \code{alpha}: If \code{prior = "bnp.lasso"}, the \bold{concentration} 
 #'   parameter in the Dirichlet process prior.
-#'   \item \code{intercept}: Whether an intercept was included in the model.
 #'   \item \code{variance.prior.type}: Whether the variance on the sampling 
 #'   variance was an independent-type prior or a conjugate-type prior.
 #'   \item \code{max.iters}: The total number of MCMC iterations.
@@ -109,16 +100,11 @@
 #'   \item \code{n.preds}: The number of predictors.
 #'   \item \code{n.draws}: The number of posterior draws after burn-in and
 #'   thinning.
-#'   \item \code{X}: Matrix of predictors.
 #'   \item \code{y}: Vector of responses.
 #'   \item \code{loglik}: Matrix of size \code{n.draws}-by-\code{n.obs} with the 
 #'   log-likelihood of each observation at each MCMC iteration.
-#'   \item \code{post.pred.fitted.values}: A matrix of size 
-#'   \code{n.draws}-by-\code{n.obs}, where each row is a draw from the posterior 
-#'   predictive distribution of the fitted values.
-#'   \item \code{post.pred.residuals}: A matrix of size 
-#'   \code{n.draws}-by-\code{n.obs}, where each row is a draw from the posterior 
-#'   predictive distribution of the residuals.  
+#'   \item \code{post.pred}: A matrix of size \code{n.draws}-by-\code{n.obs}, 
+#'   where each row is a draw from the posterior predictive distribution.
 #' }
 #' 
 #' @references
@@ -141,15 +127,13 @@
 #'
 #' @encoding UTF-8
 #'
-bnplasso.lm <- function(X, y, intercept = TRUE, prior = NULL, a = NULL, 
-                        b = NULL, alpha = NULL, variance.prior.type = NULL, 
-                        max.iters = 6000L, burn.in = 1000L, thin = 1L,
-                        polya = TRUE, float = FALSE) {
+bnplasso.spm <- function(y, prior = NULL, a = NULL, b = NULL, 
+                         alpha = NULL, variance.prior.type = NULL, 
+                         max.iters = 6000L, burn.in = 1000L, thin = 1L,
+                         polya = FALSE, float = FALSE) {
   
   # Input validation -----------------------------------------------------------
   if(not.y(y)) stop("y is not a valid response vector")
-  if(not.x(X, y)) stop("X is not a valid matrix of predictors")
-  if (not.logic(intercept)) stop("intercept must be logical of length one")
   if (!is.null(prior)) {if (not.pr(prior)) stop("not a valid shrinakge prior")}
   if (!is.null(variance.prior.type)) {
     if (not.var(variance.prior.type)) stop("not a valid variance.prior.type")
@@ -168,7 +152,7 @@ bnplasso.lm <- function(X, y, intercept = TRUE, prior = NULL, a = NULL,
   gc()
   
   # Set default hyper-parameters (if not provided) -----------------------------
-  n <- length(y)
+  n <- p <- length(y)
   if (is.null(prior)) prior <- "bnp.lasso"
   if (is.null(a)) a <- 0.1
   if (is.null(b)) b <- if (prior == "bnp.lasso") max(0.01 / n, 1e-10) else 0.01
@@ -176,7 +160,7 @@ bnplasso.lm <- function(X, y, intercept = TRUE, prior = NULL, a = NULL,
     if (prior == "bnp.lasso") {
       # Choose alpha so that prior K is approx. 3
       candidate.alphas <- seq(0.0001, 30, length.out = 300)
-      prior.K <- sapply(candidate.alphas, \(al) sum(al/((1:ncol(X)) - 1 + al)))
+      prior.K <- sapply(candidate.alphas, \(al) sum(al / (seq_len(p) - 1 + al)))
       alpha <- candidate.alphas[which.min(abs(prior.K - 3L))]
       rm(candidate.alphas, prior.K); gc()
     } else { alpha <- 1}
@@ -187,20 +171,17 @@ bnplasso.lm <- function(X, y, intercept = TRUE, prior = NULL, a = NULL,
   
   # Run Gibbs sampler ----------------------------------------------------------
   bnplasso_out <- mcmc_sampler(
-    X = X, y = y, a = a, b = b, alpha = alpha, intercept = intercept,
+    X = NULL, y = y, a = a, b = b, alpha = alpha, intercept = FALSE, 
     penalty.type = prior, variance.prior.type = variance.prior.type, 
     max.iters = max.iters, burn.in = burn.in, thin = thin, 
-    polya = polya, float = float, sp.means = FALSE
+    polya = polya, float = float, sp.means = TRUE 
   )
   
   # Prepare the returns --------------------------------------------------------
-  dimsX <- dim(X)
-  n.obs <- dimsX[1]
-  n.preds <- dimsX[2] 
+  n.obs <- n.preds <- length(y)
   n.draws <- nrow(bnplasso_out$post.beta)
   bnplasso_out[["a"]] <- a
   bnplasso_out[["b"]] <- b
-  bnplasso_out[["intercept"]] <- intercept
   bnplasso_out[["shrinakge.prior"]] <- prior
   bnplasso_out[["variance.prior.type"]] <- variance.prior.type
   bnplasso_out[["max.iters"]] <- max.iters
@@ -211,33 +192,18 @@ bnplasso.lm <- function(X, y, intercept = TRUE, prior = NULL, a = NULL,
   bnplasso_out[["n.draws"]] <- n.draws # After burn-in and thinning
   if (prior == "bnp.lasso") bnplasso_out[["alpha"]] <- alpha
   
-  # Posterior predictive fitted values and residuals ---------------------------
-  # Pre-compute all linear predictors (without the intercept)
-  linPreds <- tcrossprod(X, bnplasso_out$post.beta)
-  # Add the intercept if needed
-  if (intercept) {
-    linPreds <- linPreds + matrix(
-      data = bnplasso_out$post.mu, nrow = nrow(linPreds),
-      ncol = ncol(linPreds), byrow = TRUE
-    )
-  }
-  # Note: In "post_pred_fits" and "post_pred_res", each row corresponds to an
-  # MCMC draw and each column to an observation.
-  post_pred_fits <- matrix(data = NA, nrow = n.draws, ncol = n.obs)
-  loglik <- post_pred_res <- post_pred_fits
-  post_sigmas <- sqrt(pmax(abs(bnplasso_out$post.sigma2), 1e-16))
+  # Posterior predictive draws -------------------------------------------------
+  post_pred <- loglik <- matrix(data = NA, nrow = n.draws, ncol = n.obs)
+  post_sigma <- sqrt(pmax(abs(bnplasso_out$post.sigma2), 1e-16))
   for (s in seq_len(n.draws)) {
-    fit_val_s <- linPreds[,s] + rnorm(n.obs, 0, post_sigmas[s])
-    post_pred_fits[s,] <- fit_val_s
-    post_pred_res[s,] <- y - fit_val_s
-    loglik[s,] <- dnorm(y, linPreds[,s], post_sigmas[s], log = TRUE)
+    post_beta <- bnplasso_out$post.beta[s,]
+    post_pred[s,] <- post_beta + rnorm(n.obs, 0, post_sigma[s])
+    loglik[s,] <- dnorm(y, post_beta, post_sigma[s], log = TRUE)
   }
-  rm(linPreds, post_sigmas, fit_val_s); gc()
-  bnplasso_out[["X"]] <- X
+  rm(post_sigma, post_beta); gc()
   bnplasso_out[["y"]] <- y
   bnplasso_out[["loglik"]] <- loglik
-  bnplasso_out[["post.pred.fitted.values"]] <- post_pred_fits
-  bnplasso_out[["post.pred.residuals"]] <- post_pred_res
-  class(bnplasso_out) <- "lmBayes"
+  bnplasso_out[["post.pred"]] <- post_pred
+  class(bnplasso_out) <- "spmBayes"
   bnplasso_out
 }

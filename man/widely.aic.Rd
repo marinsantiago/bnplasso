@@ -7,16 +7,16 @@
 widely.aic(object)
 }
 \arguments{
-\item{object}{An object of class \code{'lmBayes'}.}
+\item{object}{An object of class \code{'lmBayes'} or \code{spmBayes}.}
 }
 \value{
 The estimated WAIC.
 }
 \description{
 This function computes the Watanabe–Akaike information criterion (WAIC)
-for an object of class \code{lmBayes}. The WAIC is converted into deviance 
-scale so that it is comparable with other information criteria 
-like AIC and BIC.
+for an object of class \code{lmBayes} or \code{spmBayes}. The WAIC is 
+converted into deviance scale so that it is comparable with other 
+information criteria like AIC and BIC.
 }
 \author{
 Santiago Marin

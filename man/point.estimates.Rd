@@ -2,13 +2,12 @@
 % Please edit documentation in R/point_estimates.R
 \name{point.estimates}
 \alias{point.estimates}
-\title{Point estimates of the regression coefficients
-\code{lmBayes}}
+\title{Point estimates of the regression coefficients}
 \usage{
-point.estimates(object, type = "sn", retain = "mode")
+point.estimates(object, type = "sn", retain = "mean")
 }
 \arguments{
-\item{object}{An object of class 'lmBayes'.}
+\item{object}{An object of class \code{'lmBayes'} or \code{'spmBayes'}.}
 
 \item{type}{A character string denoting which algorithm should be used to
 recover the point estimates. The options are: (i) \code{"sn"} for the
@@ -28,7 +27,7 @@ coefficients.
 }
 \description{
 Computes point estimates of the regression coefficients for an object of 
-class \code{lmBayes}.
+class \code{lmBayes} or \code{'spmBayes'}.
 }
 \references{
 Q. Li, and N. Lin (2010), The Bayesian elastic net. \emph{Bayesian Analysis},
