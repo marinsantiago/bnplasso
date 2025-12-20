@@ -41,6 +41,29 @@ jobs:
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: false
 
+      # ---------- macOS-only hardening (bnplasso 0.2.2) ---------------------------------------------
+      # Show library paths (useful if we ever need to debug lib mismatch)
+      - name: Show R library paths (macOS)
+        if: matrix.config.os == 'macos-14'
+        shell: Rscript {0}
+        run: |
+          cat("R_LIBS_USER =", Sys.getenv("R_LIBS_USER"), "\n")
+          cat(".libPaths()  =", paste(.libPaths(), collapse = "\n               "), "\n")
+
+      # Preinstall pure-R packages from source to avoid pruned macOS ARM binaries
+      - name: macOS preinstall latest ggsci/reformulas from source
+        if: matrix.config.os == 'macos-14'
+        shell: Rscript {0}
+        run: |
+          install.packages("ggsci", type = "source")
+          install.packages("reformulas", type = "source")
+
+      # Make pak treat platforms as source-only on macOS, avoiding .tgz binaries
+      - name: macOS disable pak binary platforms
+        if: matrix.config.os == 'macos-14'
+        run: echo "PKG_PLATFORMS=source" >> $GITHUB_ENV
+      # ---------- end macOS-only hardening -----------------------------------------------------------
+
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: any::rcmdcheck
