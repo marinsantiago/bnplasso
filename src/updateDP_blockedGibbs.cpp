@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------------
-// Multivariate normal samplers, assuming a conjugate prior on the variance
+// Update for the Dirichlet proc. mix. using a blocked Gibbs sampling scheme 
 // -----------------------------------------------------------------------------
 
 #include <RcppEigen.h>

@@ -1,8 +1,8 @@
 # ------------------------------------------------------------------------------
-# S3 methods for class "lmBayes"
+# S3 class-specific methods
 # ------------------------------------------------------------------------------
 
-# Class specific helpers -------------------------------------------------------
+# helpers ----------------------------------------------------------------------
 
 # Checks if an object inherits from "lmBayes".
 is.lmBayes <- \(object) inherits(object, "lmBayes")
