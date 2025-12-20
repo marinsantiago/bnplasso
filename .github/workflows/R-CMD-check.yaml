@@ -29,6 +29,7 @@ jobs:
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
+      _R_CHECK_INSTALL_ARGS_: --no-binary     # ensure package under test is installed from source
 
     steps:
       - uses: actions/checkout@v4
@@ -39,12 +40,13 @@ jobs:
         with:
           r-version: ${{ matrix.config.r }}
           http-user-agent: ${{ matrix.config.http-user-agent }}
-          use-public-rspm: true
+          use-public-rspm: false
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: any::rcmdcheck
           needs: check
+          package-type: source                # IMPORTANT: compile deps from source
 
       - uses: r-lib/actions/check-r-package@v2
         with:
