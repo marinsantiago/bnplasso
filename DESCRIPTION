@@ -35,7 +35,8 @@ Description:
 License: GPL (>= 2)
 Language: en-US
 Imports: Rcpp (>= 1.0.14), actuar, progress, stats, coda, FKSUM,
-        graphics, ggplot2, viridis, BNPmix, loo, ggsci, reformulas
+        graphics, ggplot2, viridis, BNPmix, loo, ggsci (>= 4.2.0),
+        reformulas (>= 0.4.3)
 LinkingTo: Rcpp, RcppEigen
 URL: https://github.com/marinsantiago/bnplasso
 BugReports: https://github.com/marinsantiago/bnplasso/issues
@@ -43,7 +44,7 @@ Depends: R (>= 4.2.0)
 Encoding: UTF-8
 RoxygenNote: 7.3.3
 NeedsCompilation: yes
-Packaged: 2025-12-20 05:58:25 UTC; santiago
+Packaged: 2025-12-20 06:13:17 UTC; santiago
 Author: Santiago Marin [aut, cre] (ORCID:
     <https://orcid.org/0009-0006-0086-3721>),
   Bronwyn Loong [ctb] (ORCID: <https://orcid.org/0000-0002-1409-8892>),
