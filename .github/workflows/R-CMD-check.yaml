@@ -20,7 +20,7 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: macos-14,        r: 'release'}
+          - {os: macos-latest,        r: 'release'}
           - {os: windows-latest,  r: 'release'}
           - {os: ubuntu-latest,   r: 'devel', http-user-agent: 'release'}
           - {os: ubuntu-latest,   r: 'release'}
@@ -39,16 +39,7 @@ jobs:
         with:
           r-version: ${{ matrix.config.r }}
           http-user-agent: ${{ matrix.config.http-user-agent }}
-          use-public-rspm: false
-
-      # --- macOS-only: (bnplasso 0.2.2) --------------------------------------
-      - name: macOS preinstall latest ggsci/reformulas from source
-        if: matrix.config.os == 'macos-14'
-        shell: Rscript {0}
-        run: |
-          install.packages("ggsci", type = "source")
-          install.packages("reformulas", type = "source")
-      # --- end macOS-only ----------------------------------------------------
+          use-public-rspm: true
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
