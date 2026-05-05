@@ -21,11 +21,11 @@ adaptive Lasso (Leng et al., 2014).
 
 ## Installation
 
-You can install the latest developer's version via `devtools` as:
+You can install the latest developer's version via `pak` as:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("marinsantiago/bnplasso")
+# install.packages("pak")
+pak::pak("marinsantiago/bnplasso")
 ```
 
 If you would like to reproduce the results from Marin et al. (2025+), you should install the 
@@ -33,7 +33,7 @@ version of the  package employed at that time (`bnplasso 0.1.0`).
 That can easily be done by running in R:
 
 ``` r
-devtools::install_github("marinsantiago/bnplasso@3c87169")
+pak::pak("marinsantiago/bnplasso@3c87169")
 ```
 
 Alternatively, you can also install the package (`bnplasso 0.1.0`) from the
