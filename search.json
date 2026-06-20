@@ -1,0 +1,72 @@
+[
+  {
+    "objectID": "index.html#santiago-marin",
+    "href": "index.html#santiago-marin",
+    "title": "About",
+    "section": "Santiago Marin",
+    "text": "Santiago Marin\n\n\n  Scholar    GitHub     ORCiD"
+  },
+  {
+    "objectID": "misc.html",
+    "href": "misc.html",
+    "title": "Miscellaneous ️🗂",
+    "section": "",
+    "text": "Miscellaneous ️🗂\n\n\nMy Academic Travel Map ✈️\n\n\n\n\n\n\n\n\n\n\nNote: The above map pinpoints the places where I have participated in seminars, conferences, workshops, and other academic activities since beginning my PhD."
+  },
+  {
+    "objectID": "awards.html",
+    "href": "awards.html",
+    "title": "Honors & Awards 🎉",
+    "section": "",
+    "text": "Best Poster Award, Bayes on the Beach, February 2024\nPh.D. Stipend Scholarship, Australian National University, 2023 – 2026\nHDR Fee Remission Merit Scholarship, Australian National University, 2023 – 2026\nChancellor’s Letter of Commendation, Australian National University, 2021\n\n\n\nTravel Awards 🥳\n\nInternational Society for Bayesian Analysis (ISBA) Travel Award:\n\nAward to attend BayesComp 2025, Singapore, June 2025\nAward to attend the 3rd ISBA-BNP Networking Workshop, Singapore, August 2024\nAward to attend the 2nd ISBA-BNP Networking Workshop, Melbourne, Australia, December 2023\n\nStatistical Society of Australia (SSA) Student Registration Grant:\n\nGrant to attend the 31st TIES conference, Adelaide, Australia, December 2024\nGrant to attend the ASC & OZCOTS conferences, Wollongong, Australia, December 2023"
+  },
+  {
+    "objectID": "publications/citations/AR-LB-SG_cite.html#bayesian-nonparametric-modeling-of-dynamic-pollution-clusters-through-an-autoregressive-logistic-beta-stirling-gamma-process",
+    "href": "publications/citations/AR-LB-SG_cite.html#bayesian-nonparametric-modeling-of-dynamic-pollution-clusters-through-an-autoregressive-logistic-beta-stirling-gamma-process",
+    "title": "Santiago Marin",
+    "section": "Bayesian nonparametric modeling of dynamic pollution clusters through an autoregressive logistic-beta Stirling-gamma process 📔",
+    "text": "Bayesian nonparametric modeling of dynamic pollution clusters through an autoregressive logistic-beta Stirling-gamma process 📔\n\nBibTeX citation:\n@misc{marin2026dynamic,\n  title         = {{B}ayesian nonparametric modeling of dynamic pollution clusters through an autoregressive logistic-beta {S}tirling-gamma process},\n  author        = {Santiago Marin and Bronwyn Loong and Anton H. Westveld},\n  year          = {2026},\n  eprint        = {2601.04625},\n  archivePrefix = {arXiv},\n  primaryClass  = {stat.ME}\n}"
+  },
+  {
+    "objectID": "publications/publications.html",
+    "href": "publications/publications.html",
+    "title": "Publications 📚",
+    "section": "",
+    "text": "Publications 📚\n\n\nPeer-reviewed Journal Articles\n\n\n\nMarin, S.\n\n, Loong, B. and Westveld, A. H. (2026)  Adaptive shrinkage with a nonparametric Bayesian Lasso  Journal of Computational and Graphical Statistics, 35(2):854–864    article citation poster\n\n\n\n\n\nMarin, S.\n\n, Loong, B. and Westveld, A. H. (2026)  BOB: Bayesian optimized bootstrap for approximate posterior sampling in Gaussian mixture models  Statistics and Computing, 36(1), 14    article citation\n\n\n\n\nPreprints & Working Papers\n\n\n\nMarin, S.\n\n, Loong, B. and Westveld, A. H. (2026+)  Bayesian nonparametric modeling of dynamic pollution clusters through an autoregressive logistic-beta Stirling-gamma process  arXiv, 2601.04625  article citation"
+  },
+  {
+    "objectID": "teaching.html",
+    "href": "teaching.html",
+    "title": "Teaching 📝",
+    "section": "",
+    "text": "Teaching 📝\n\nAs Teaching Assistant\n\nAustralian National University\n\nSTAT7039: Principles of Mathematical Statistics. Graduate level course.  [S1–2026]\nSTAT6016: Introduction to Bayesian Data Analysis. Graduate level course.  [S2–2025]\nSTAT8140: Statistical Learning. Graduate level course.  [S1–2025]\nSTAT3040: Statistical Learning. Undergraduate level course.  [S1–2024]\nSTAT6030: Generalised Linear Models. Graduate level course.  [S2–2023]\n\n\n\n\nMiscellaneous Teaching\n\nASA Datafest: Teaching Assistant for the American Statistical Association DataFest @ ANU  [S1–2023]"
+  },
+  {
+    "objectID": "talks.html",
+    "href": "talks.html",
+    "title": "Talks & Presentations 💬",
+    "section": "",
+    "text": "Talks & Presentations 💬\n\nConference Presentations & Talks\n\nAdaptive Shrinkage with a Nonparametric Bayesian Lasso\n\n\nInvited\n\nseminar at the NUMBATs Research Group Meeting, Monash University. Melbourne, Australia, May 2026\n\nInvited\n\nseminar at the Statistics Brown Bag Seminar Series, Australian National University. Canberra, Australia, December 2025\nPoster presentation at BayesComp 2025. Singapore, June 2025\n\nDevelopments in Scalable Posterior Sampling through Random Weighting\n\n\nInvited\n\noral presentation at the 31st Conference of The International Environmetrics Society. Adelaide, Australia, December 2024\n\nBOB: Bayesian Optimized Bootstrap for Approximate Posterior Sampling in Gaussian Mixture Models\n\nContributed oral presentation at the 3rd ISBA Bayesian Nonparametrics Networking Workshop. Singapore, August 2024\nPoster presentation at Bayes on the Beach. Gold Coast, Australia, February 2024\nPoster presentation at the 2nd ISBA Bayesian Nonparametrics Networking Workshop. Melbourne, Australia, December 2023\nPoster + short oral presentation at the Australian Statistical Conference. Wollongong, Australia, December 2023"
+  },
+  {
+    "objectID": "publications/citations/bob_cite.html#bob-bayesian-optimized-bootstrap-for-approximate-posterior-sampling-in-gaussian-mixture-models",
+    "href": "publications/citations/bob_cite.html#bob-bayesian-optimized-bootstrap-for-approximate-posterior-sampling-in-gaussian-mixture-models",
+    "title": "Santiago Marin",
+    "section": "BOB: Bayesian optimized bootstrap for approximate posterior sampling in Gaussian mixture models 📔",
+    "text": "BOB: Bayesian optimized bootstrap for approximate posterior sampling in Gaussian mixture models 📔\n\nBibTeX citation:\n@article{marin_bob,\n  title   = {{BOB}: {B}ayesian optimized bootstrap for approximate posterior sampling in {G}aussian mixture models},\n  author  = {Santiago Marin and Bronwyn Loong and Anton H. Westveld},\n  journal = {Statistics and Computing},\n  volume  = {36},\n  number  = {1},\n  pages   = {14},\n  year    = {2026},\n  doi     = {10.1007/s11222-025-10763-y}\n}"
+  },
+  {
+    "objectID": "publications/citations/lasso_bnp_cite.html#adaptive-shrinkage-with-a-nonparametric-bayesian-lasso",
+    "href": "publications/citations/lasso_bnp_cite.html#adaptive-shrinkage-with-a-nonparametric-bayesian-lasso",
+    "title": "Santiago Marin",
+    "section": "Adaptive Shrinkage with a Nonparametric Bayesian Lasso 📔",
+    "text": "Adaptive Shrinkage with a Nonparametric Bayesian Lasso 📔\n\nBibTeX citation:\n@article{marin_bnplasso,\n  title   = {Adaptive Shrinkage with a Nonparametric {B}ayesian Lasso},\n  author  = {Santiago Marin and Bronwyn Loong and Anton H. Westveld},\n  journal = {Journal of Computational and Graphical Statistics},\n  volume  = {35},\n  number  = {2},\n  pages   = {854--864},\n  year    = {2026},\n  doi     = {10.1080/10618600.2025.2572327}\n}"
+  },
+  {
+    "objectID": "software/software.html",
+    "href": "software/software.html",
+    "title": "Software </> 💾",
+    "section": "",
+    "text": "Software &lt;/&gt; 💾\n\nR packages\nMost of my methods are available as R packages. This is a selection of them."
+  }
+]
