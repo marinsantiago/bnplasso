@@ -1,0 +1,52 @@
+Package: bnplasso
+Type: Package
+Title: Adaptive Shrinkage with a Nonparametric Bayesian Lasso
+Version: 0.2.2
+Authors@R: c(
+    person(
+      given = "Santiago", 
+      family = "Marin", 
+      role = c("aut", "cre"), 
+      email = "santiago.marinardila@anu.edu.au", 
+      comment = c(ORCID = "0009-0006-0086-3721")
+    ),
+    person(
+      given = "Bronwyn", 
+      family = "Loong", 
+      role = c("ctb"), 
+      email = "bronwyn.loong@anu.edu.au", 
+      comment = c(ORCID = "0000-0002-1409-8892")
+    ),
+    person(
+      given = "Anton H.", 
+      family = "Westveld", 
+      role = c("ctb"), 
+      email = "anton.westveld@anu.edu.au", 
+      comment = c(ORCID = "0000-0003-1671-0931")
+    )
+    )
+Description: 
+    Fit linear regression models with a Nonparametric Bayesian Lasso 
+    (BNP-Lasso) prior, an adaptive and flexible shrinkage prior for
+    Bayesian regression and variable selection. The package uses an efficient
+    Markov chain Monte Carlo algorithm to generate draws from the posterior
+    distribution of the model parameters. For additional details, please see 
+    Marin et al. (2026) <https://doi.org/10.1080/10618600.2025.2572327>. 
+License: GPL (>= 2)
+Language: en-US
+Imports: Rcpp (>= 1.0.14), actuar, progress, stats, coda, FKSUM,
+        graphics, ggplot2, viridis, BNPmix, loo
+LinkingTo: Rcpp, RcppEigen
+URL: https://github.com/marinsantiago/bnplasso
+BugReports: https://github.com/marinsantiago/bnplasso/issues
+Depends: R (>= 4.2.0)
+Encoding: UTF-8
+RoxygenNote: 7.3.3
+NeedsCompilation: yes
+Packaged: 2026-06-20 02:23:48 UTC; santiago
+Author: Santiago Marin [aut, cre] (ORCID:
+    <https://orcid.org/0009-0006-0086-3721>),
+  Bronwyn Loong [ctb] (ORCID: <https://orcid.org/0000-0002-1409-8892>),
+  Anton H. Westveld [ctb] (ORCID:
+    <https://orcid.org/0000-0003-1671-0931>)
+Maintainer: Santiago Marin <santiago.marinardila@anu.edu.au>
