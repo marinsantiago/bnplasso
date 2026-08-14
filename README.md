@@ -269,11 +269,17 @@ Watanabe–Akaike information criterion (WAIC), as in Vehtari et al. (2017).
 
 ``` r
 bnplasso::psis.loo(out.bnp)
-bnplasso::widely.aic(out.bnp)
 ```
 
 ``` 
 713.9746
+```
+
+``` r
+bnplasso::widely.aic(out.bnp)
+```
+
+```
 712.7612
 ```
 
