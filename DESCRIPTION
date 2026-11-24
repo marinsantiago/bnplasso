@@ -43,7 +43,7 @@ Depends: R (>= 4.2.0)
 Encoding: UTF-8
 Config/roxygen2/version: 8.1.1
 NeedsCompilation: yes
-Packaged: 2026-11-24 07:32:14 UTC; santiago
+Packaged: 2026-11-24 07:48:51 UTC; santiago
 Author: Santiago Marin [aut, cre] (ORCID:
     <https://orcid.org/0009-0006-0086-3721>),
   Bronwyn Loong [ctb] (ORCID: <https://orcid.org/0000-0002-1409-8892>),

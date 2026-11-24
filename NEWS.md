@@ -1,11 +1,12 @@
 # bnplasso 0.3.0
   - More efficient implementation of the underlying Gibbs sampler used to 
-    generate random draws from the posterior distribution of the model. Roughly
-    6x faster than the previous implementation.
-  - Renamed some functions and functions' arguments for clarity. For instance,
-    `blasso.lm()` was renamed to `blasso_lm()`. Similarly, `prior` was renamed 
-    to `shrinkage_prior` and `polya` was renamed to `polya_urn_sampler`.
-  - The functions now only support double point precision.
+    generate random draws from the posterior distribution of the model. The new
+    implementation is roughly 6x faster than the previous implementation.
+  - Renamed some functions and functions' arguments for the sake of clarity. 
+    For instance, `blasso.lm()` was renamed to `blasso_lm()`. Similarly, 
+    `prior` was renamed to `shrinkage_prior` and `polya` was renamed to 
+    `polya_urn_sampler`.
+  - The package now only support double point precision.
   - Latest version available at GitHub.
 
 # bnplasso 0.2.2

@@ -16,6 +16,7 @@
 #include <Eigen/Dense>
 #include <cmath>
 #include <algorithm>
+#include <chrono>
 #include "utils.h"
 #include "int_sampling.h"
 #include "update_lambda_bnp.h"
