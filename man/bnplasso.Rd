@@ -28,6 +28,11 @@ Useful links:
 \author{
 \strong{Maintainer}: Santiago Marin \email{santiago.marinardila@anu.edu.au} (\href{https://orcid.org/0009-0006-0086-3721}{ORCID})
 
+Authors:
+\itemize{
+  \item Santiago Marin \email{santiago.marinardila@anu.edu.au} (\href{https://orcid.org/0009-0006-0086-3721}{ORCID})
+}
+
 Other contributors:
 \itemize{
   \item Bronwyn Loong \email{bronwyn.loong@anu.edu.au} (\href{https://orcid.org/0000-0002-1409-8892}{ORCID}) [contributor]

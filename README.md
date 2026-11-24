@@ -13,10 +13,10 @@
 
 The R package `bnplasso` (developer's version) implements the [Nonparametric Bayesian Lasso](https://doi.org/10.1080/10618600.2025.2572327) as described in Marin et al. (2026).
 
-The main routine of the package, ```bnplasso.lm()```, returns an object of S3 class, ```"lmBayes"```, which is supported by various methods 
+The main routine of the package, ```bnplasso_lm()```, returns an object of S3 class, ```"lmBayes"```, which is supported by various methods 
 such as ```print()```, ```summary()```, ```plot()```, ```fitted()```, ```residuals()```, ```coef()```, 
 and ```predict()```, allowing users to quickly visualize, evaluate, and analyze the output in a familiar fashion. 
-The function ```bnplasso.lm()``` can also implement the Bayesian Lasso (Park and Casella, 2008) and the Bayesian 
+The function ```bnplasso_lm()``` can also implement the Bayesian Lasso (Park and Casella, 2008) and the Bayesian 
 adaptive Lasso (Leng et al., 2014).
 
 ## Installation
@@ -100,15 +100,15 @@ y.test <- as.vector(mu + X.test %*% beta + rnorm(n.test, 0, sigma))
 ```
 
 We can then easily apply the nonparametric Bayesian Lasso (Marin et al., 2025+) to these data 
-through the function `bnplasso.lm()`. 
+through the function `bnplasso_lm()`. 
 
 ``` r
 set.seed(1)
-out.bnp <- bnplasso::bnplasso.lm(X.train, y.train)
+out.bnp <- bnplasso::bnplasso_lm(X.train, y.train)
 ```
 
 Note that we are only supplying the design matrix and the response vector. 
-If some user-supplied hyperparameters are not provided, the `bnplasso.lm()` function will 
+If some user-supplied hyperparameters are not provided, the `bnplasso_lm()` function will 
 attempt to automatically determine appropriate values for those hyperparameters. That being said,
 different applications may require different and more tailored prior specifications. 
 
@@ -123,27 +123,23 @@ summary(out.bnp)
 LINEAR REGRESSION MODEL 
 
 
-NONPARAMETRIC BAYESIAN LASSO 
-
-
 Call details: 
 
 a = 0.1 
 b = 4e-05 
-alpha = 0.4014365 
 n.obs = 250 
 n.preds = 200 
-n.draws = 5000 (after burn-in and thinning) 
-elapsed = 10.58291 secs 
+n.draws = 4000 (after burn-in and thinning) 
+elapsed = 1.761656 
 
 Coefficients: 
             mean    sd   2.5%    25%    50%    75%  97.5%     n_eff
-Intercept 10.020 0.064  9.894  9.976 10.020 10.064 10.147 3802.6851
-beta_1     4.931 0.086  4.767  4.873  4.929  4.990  5.103 5000.0000
-beta_2     5.114 0.108  4.897  5.042  5.112  5.188  5.323 5000.0000
-beta_3     5.003 0.111  4.790  4.928  5.004  5.077  5.216 3759.5150
-beta_4     5.114 0.107  4.904  5.041  5.115  5.185  5.325 4162.1842
-beta_5     4.737 0.107  4.525  4.665  4.738  4.809  4.944 5000.0000
+Intercept 10.022 0.063  9.899  9.979 10.022 10.065 10.144 4000.0000
+beta_1     4.934 0.089  4.765  4.875  4.933  4.994  5.110 4000.0000
+beta_2     5.111 0.108  4.903  5.036  5.112  5.184  5.324 4000.0000
+beta_3     5.004 0.111  4.787  4.929  5.004  5.078  5.229 4000.0000
+beta_4     5.116 0.107  4.903  5.043  5.117  5.190  5.325 3776.8363
+beta_5     4.736 0.104  4.532  4.667  4.734  4.806  4.940 3546.9278
 ⋮
 ```
 It includes details about the function call, as well as the posterior mean, 
@@ -229,7 +225,7 @@ dim(pprd)
 ```
 
 ``` 
-5000 2000
+4000 2000
 ```
 
 The result is a `matrix` of size `n.draws`-by-`n.test`, where each column contains
@@ -259,7 +255,7 @@ bnplasso::elppd(out.bnp, X.test, y.test)
 ```
 
 ``` 
--1.502845
+-1.503273
 ```
 
 If a held-out set is not available, one can estimate the model fit using the 
@@ -269,18 +265,12 @@ Watanabe–Akaike information criterion (WAIC), as in Vehtari et al. (2017).
 
 ``` r
 bnplasso::psis.loo(out.bnp)
-```
-
-``` 
-713.9746
-```
-
-``` r
 bnplasso::widely.aic(out.bnp)
 ```
 
-```
-712.7612
+``` 
+710.662
+709.8214
 ```
 
 Additional guidelines and help pages for using the package functions are available [here](https://marinsantiago.github.io/bnplasso-site/reference/index.html).

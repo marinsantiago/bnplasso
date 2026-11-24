@@ -3,8 +3,8 @@
 
 #include <RcppEigen.h>
 
-Rcpp::IntegerVector int_sampling(const int & K,
-                                 const int & num_samples,
-                                 const Rcpp::NumericVector & probs);
+Rcpp::IntegerVector int_sampling(const int K,
+                                 const int num_samples,
+                                 const Eigen::VectorXd & probs);
 
 #endif  // INT_SAMPLING_H

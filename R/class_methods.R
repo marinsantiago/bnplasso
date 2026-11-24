@@ -260,6 +260,7 @@ postpred.newdata <- function(object, X.new) {
 #' 
 #' @author Santiago Marin
 #'
+#' @export
 print.lmBayes <- function(x, ...) {
   if (!is.lmBayes(x)) stop("x should be of class 'lmBayes'")
   .print_common(x)
@@ -272,6 +273,7 @@ print.lmBayes <- function(x, ...) {
 #' 
 #' @author Santiago Marin
 #'
+#' @export
 print.spmBayes <- function(x, ...) {
   if (!is.spmBayes(x)) stop("x should be of class 'spmBayes'")
   .print_common(x)
@@ -285,6 +287,7 @@ print.spmBayes <- function(x, ...) {
 #' 
 #' @author Santiago Marin
 #'
+#' @export
 summary.lmBayes <- function(object, ...) {
   if (!is.lmBayes(object)) stop("object should be of class 'lmBayes'")
   .summary_common(object)
@@ -297,6 +300,7 @@ summary.lmBayes <- function(object, ...) {
 #' 
 #' @author Santiago Marin
 #'
+#' @export
 summary.spmBayes <- function(object, ...) {
   if (!is.spmBayes(object)) stop("object should be of class 'spmBayes'")
   .summary_common(object)
@@ -318,11 +322,13 @@ summary.spmBayes <- function(object, ...) {
 #' 
 #' @author Santiago Marin
 #'
+#' @export
 coef.lmBayes <- function(object, ...) {
   if (!is.lmBayes(object)) stop("object should be of class 'lmBayes'")
   .coef_common(object)
 }
 coefficients.lmBayes <- coef.lmBayes
+
 
 #' Mean parameters
 #'
@@ -339,6 +345,7 @@ coefficients.lmBayes <- coef.lmBayes
 #' 
 #' @author Santiago Marin
 #'
+#' @export
 coef.spmBayes <- function(object, ...) {
   if (!is.spmBayes(object)) stop("object should be of class 'spmBayes'")
   .coef_common(object)
@@ -356,6 +363,7 @@ coefficients.spmBayes <- coef.spmBayes
 #' 
 #' @author Santiago Marin
 #'
+#' @export
 plot.lmBayes <- function(x, ...) {
   if (!is.lmBayes(x)) stop("x should be of class 'lmBayes'")
   .plot_common(x)
@@ -371,6 +379,7 @@ plot.lmBayes <- function(x, ...) {
 #' 
 #' @author Santiago Marin
 #'
+#' @export
 plot.spmBayes <- function(x, ...) {
   if (!is.spmBayes(x)) stop("x should be of class 'spmBayes'")
   .plot_common(x)
@@ -392,6 +401,7 @@ plot.spmBayes <- function(x, ...) {
 #' 
 #' @author Santiago Marin
 #'
+#' @export
 fitted.lmBayes <- function(object, ...) {
   if (!is.lmBayes(object)) stop("object should be of class 'lmBayes'")
   .fitted_common(object)
@@ -413,6 +423,7 @@ fitted.values.lmBayes <- fitted.lmBayes
 #' 
 #' @author Santiago Marin
 #'
+#' @export
 fitted.spmBayes <- function(object, ...) {
   if (!is.spmBayes(object)) stop("object should be of class 'lmBayes'")
   .fitted_common(object)
@@ -435,6 +446,7 @@ fitted.values.spmBayes <- fitted.spmBayes
 #' 
 #' @author Santiago Marin
 #'
+#' @export
 residuals.lmBayes <- function(object, ...) {
   chck <- !is.lmBayes(object)
   if (chck) stop("object should be of class 'lmBayes'")
@@ -462,6 +474,7 @@ resid.lmBayes <- residuals.lmBayes
 #'
 #' @author Santiago Marin
 #'
+#' @export
 predict.lmBayes <- function(object, X.new, ...) {
   chck <- !is.lmBayes(object)
   if (chck) stop("object should be of class 'lmBayes'")

@@ -2,8 +2,6 @@
 # Compute point estimates of the regression coefficients (and the intercept)
 # ------------------------------------------------------------------------------
 
-# Point estimate helpers -------------------------------------------------------
-
 # Compute the posterior mean for all the regression coefficients
 post.mean <- function(object) colMeans(object$post.beta)
 
@@ -73,9 +71,7 @@ scaled.neighbor.criterion <- function(object, retain) {
   )
 }
 
-
 # Point estimates main routine -------------------------------------------------
-
 
 #' Point estimates of the regression coefficients
 #'

@@ -3,14 +3,12 @@
 
 #include <RcppEigen.h>
 
-Eigen::VectorXd NumVec_to_EigenVec(Rcpp::NumericVector & x);
+bool within_integer_vec(const int x, const std::vector<int> v);
 
-Eigen::VectorXf NumVec_to_EigenVec_float(const Rcpp::NumericVector & x);
+Eigen::MatrixXd center(const Eigen::MatrixXd & x);
 
-Rcpp::NumericVector EigenVec_to_NumVec(const Eigen::VectorXd & x);
+Eigen::MatrixXd make_posdef(const Eigen::MatrixXd & m);
 
-Rcpp::NumericVector EigenVecFloat_to_NumVec(const Eigen::VectorXf & x);
-
-Eigen::MatrixXd get_tXX(const Eigen::MatrixXd & X);
+double find_alpha(const int p, const double target);
 
 #endif  // UTILS_H

@@ -1,9 +1,19 @@
+# bnplasso 0.3.0
+  - More efficient implementation of the underlying Gibbs sampler used to 
+    generate random draws from the posterior distribution of the model. Roughly
+    6x faster than the previous implementation.
+  - Renamed some functions and functions' arguments for clarity. For instance,
+    `blasso.lm()` was renamed to `blasso_lm()`. Similarly, `prior` was renamed 
+    to `shrinkage_prior` and `polya` was renamed to `polya_urn_sampler`.
+  - The functions now only support double point precision.
+  - Latest version available at GitHub.
+
 # bnplasso 0.2.2
   - The package now includes a dedicated routine, `bnplasso.spm()`, which 
     implements the sparse normal-means problem. The routine returns an object of
     S3 class, `"spmBayes"`, supported by various class-specific methods. 
   - Other internal functionality improvements.
-  - Latest version available at GitHub.
+  - Archived GitHub version: [marinsantiago/bnplasso@dee47cd]()
 
 # bnplasso 0.2.1
   - The package now includes the functions `psis.loo()` and `widely.aic()`, 
