@@ -1,0 +1,435 @@
+# bnplasso ![bnplasso](reference/figures/bnplasso.png)
+
+## Overview
+
+The R package `bnplasso` (developer’s version) implements the
+[Nonparametric Bayesian
+Lasso](https://doi.org/10.1080/10618600.2025.2572327) as described in
+Marin et al. (2026).
+
+The main routine of the package,
+[`bnplasso_lm()`](reference/bnplasso_lm.md), returns an object of S3
+class, `"lmBayes"`, which is supported by various methods such as
+[`print()`](https://rdrr.io/r/base/print.html),
+[`summary()`](https://rdrr.io/r/base/summary.html),
+[`plot()`](https://rdrr.io/r/graphics/plot.default.html),
+[`fitted()`](https://rdrr.io/r/stats/fitted.values.html),
+[`residuals()`](https://rdrr.io/r/stats/residuals.html),
+[`coef()`](https://rdrr.io/r/stats/coef.html), and
+[`predict()`](https://rdrr.io/r/stats/predict.html), allowing users to
+quickly visualize, evaluate, and analyze the output in a familiar
+fashion. The function [`bnplasso_lm()`](reference/bnplasso_lm.md) can
+also implement the Bayesian Lasso (Park and Casella, 2008) and the
+Bayesian adaptive Lasso (Leng et al., 2014).
+
+## Installation
+
+You can install the latest developer’s version via `pak` as:
+
+``` r
+
+# install.packages("pak")
+pak::pak("marinsantiago/bnplasso")
+```
+
+If you would like to reproduce the results from Marin et al. (2026), you
+should install the version of the package employed at that time
+(`bnplasso 0.1.0`). That can easily be done by running in R:
+
+``` r
+
+pak::pak("marinsantiago/bnplasso@3c87169")
+```
+
+Alternatively, you can also install the package (`bnplasso 0.1.0`) from
+the `bnplasso` folder in the supplementary materials to Marin et
+al. (2026) via `devtools`:
+
+1.  In R, set your working directory to the folder `bnplasso`.
+
+2.  Run the following R code:
+
+``` r
+
+# install.packages("devtools")
+devtools::build()
+devtools::install()
+```
+
+A detailed *changelog* is available
+[here](https://marinsantiago.github.io/bnplasso-site/news/index.html).
+
+## Usage
+
+First, let’s start by loading some packages that are not required by
+`bnplasso` but are necessary for this illustrative example.
+
+``` r
+
+library(mvtnorm)
+```
+
+Next, let’s generate some synthetic predictors.
+
+``` r
+
+p <- 200
+rho <- 0.7
+n.train <- 250
+n.test <- 2000
+
+set.seed(1)
+Sigma.x <- rho^abs(matrix(1:p - 1, p, p, byrow = TRUE) - (1:p - 1))
+X.train <- rmvnorm(n.train, rep(0, p), Sigma.x)
+X.test <- rmvnorm(n.test, rep(0, p), Sigma.x)
+```
+
+Here, our training set is of size 250 (`n.train`), while our held-out
+set is of size 2000 (`n.test`). The covariate space has 200 dimensions
+(`p`), and each covariate vector is drawn from a multivariate normal
+distribution with mean zero and an AR(1) covariance matrix, where the
+correlation parameter is 0.7 (`rho`).
+
+Now, we will generate the model parameters.
+
+``` r
+
+mu <- 10
+sigma <- 1
+beta <- c(rep(5, 20), rep(0, 180))
+```
+
+Here, the intercept term is equal to ten (`mu`), the residual standard
+deviation is one (`sigma`), and the vector of regression coefficients is
+generated in a way so that only 10% of its entries are nonzero (`beta`).
+
+Finally, let’s generate the responses.
+
+``` r
+
+set.seed(1)
+y.train <- as.vector(mu + X.train %*% beta + rnorm(n.train, 0, sigma))
+y.test <- as.vector(mu + X.test %*% beta + rnorm(n.test, 0, sigma))
+```
+
+We can then easily apply the nonparametric Bayesian Lasso (Marin et al.,
+2025+) to these data through the function
+[`bnplasso_lm()`](reference/bnplasso_lm.md).
+
+``` r
+
+set.seed(1)
+out.bnp <- bnplasso::bnplasso_lm(X.train, y.train)
+```
+
+Note that we are only supplying the design matrix and the response
+vector. If some user-supplied hyperparameters are not provided, the
+[`bnplasso_lm()`](reference/bnplasso_lm.md) function will attempt to
+automatically determine appropriate values for those hyperparameters.
+That being said, different applications may require different and more
+tailored prior specifications.
+
+The method [`summary()`](https://rdrr.io/r/base/summary.html) provides
+information about the model fit.
+
+``` r
+
+summary(out.bnp)
+```
+
+    LINEAR REGRESSION MODEL
+
+
+    Call details:
+
+    a = 0.1
+    b = 4e-05
+    n.obs = 250
+    n.preds = 200
+    n.draws = 4000 (after burn-in and thinning)
+    elapsed = 1.761656
+
+    Coefficients:
+                mean    sd   2.5%    25%    50%    75%  97.5%     n_eff
+    Intercept 10.022 0.063  9.899  9.979 10.022 10.065 10.144 4000.0000
+    beta_1     4.934 0.089  4.765  4.875  4.933  4.994  5.110 4000.0000
+    beta_2     5.111 0.108  4.903  5.036  5.112  5.184  5.324 4000.0000
+    beta_3     5.004 0.111  4.787  4.929  5.004  5.078  5.229 4000.0000
+    beta_4     5.116 0.107  4.903  5.043  5.117  5.190  5.325 3776.8363
+    beta_5     4.736 0.104  4.532  4.667  4.734  4.806  4.940 3546.9278
+    ⋮
+
+It includes details about the function call, as well as the posterior
+mean, posterior standard deviation, various posterior quantiles, and the
+MCMC effective sample size for each of the model parameters.
+
+The method [`plot()`](https://rdrr.io/r/graphics/plot.default.html)
+produces various model diagnostics plots, including posterior predictive
+checks and residual diagnostics.
+
+``` r
+
+plot(out.bnp)
+```
+
+![](./reference/figures/Rplot1.png)![](./reference/figures/Rplot2.png)
+
+![](./reference/figures/Rplot3.png)![](./reference/figures/Rplot4.png)
+
+One can also extract the individual chains containing posterior draws
+from each of the model parameters. For instance, let’s extract and plot
+the chains for the `intercept`, `beta_1`, and `beta_200`.
+
+``` r
+
+plot(out.bnp$post.mu, type = "l", ylab = "", main = "mu")
+plot(out.bnp$post.beta[,1], type = "l", ylab = "", main = "beta_1")
+plot(out.bnp$post.beta[,200], type = "l", ylab = "", main = "beta_200")
+```
+
+![](./reference/figures/Rplot5.png)
+
+![](./reference/figures/Rplot6.png)
+
+![](./reference/figures/Rplot7.png)
+
+Note that the chains are centered around the true parameter values and
+exhibit good mixing!
+
+Other useful class-specific methods include:
+
+``` r
+
+print(out.bnp)
+fitted(out.bnp)
+residuals(out.bnp)
+coef(out.bnp)
+```
+
+We can also visualize the posterior co-clustering probabilities, i.e.,
+the posterior probabilities that two regression coefficients will be
+clustered together.
+
+``` r
+
+bnplasso::coclust.probs(out.bnp$post.clust_idx)
+```
+
+![](./reference/figures/Rplot8.png)
+
+Note that the first 20 regression coefficients (which are nonzero) are
+clustered together with large probability, while the remaining 180
+(which are zero) are also clustered together with large probability. As
+such, the nonparametric Bayesian Lasso is accurately performing variable
+selection.
+
+If desired, one can also obtain a point estimate of the partition of the
+regression coefficients.
+
+``` r
+
+part <- bnplasso::get.partition(out.bnp$post.clust_idx)
+```
+
+By default, the function [`get.partition()`](reference/get.partition.md)
+employs the variation of information loss function from Wade and
+Ghahramani (2018); however, users can also employ the Binder loss
+function. One can visualize this partition with the function
+[`coclust.point()`](reference/coclust.point.md).
+
+``` r
+
+bnplasso::coclust.point(part)
+```
+
+![](./reference/figures/Rplot9.png)
+
+It is also possible to perform out-of-sample predictions using the
+method [`predict()`](https://rdrr.io/r/stats/predict.html).
+
+``` r
+
+pprd <- predict(out.bnp, X.test)
+```
+
+``` r
+
+dim(pprd)
+```
+
+    4000 2000
+
+The result is a `matrix` of size `n.draws`-by-`n.test`, where each
+column contains posterior predictive draws from each one of the points
+we wish to predict.
+
+``` r
+
+plot(density(pprd[,1]), lwd = 3, xlab = "", ylab = "", "y_test.1")
+abline(v = y.test[1], col = 2, lwd = 3, lty = 2)
+legend("topright", c("Predicted", "Actual"), lwd = 3, col = 1:2, lty = 1:2)
+
+plot(density(pprd[,2000]), lwd = 3, xlab = "", ylab = "", "y_test.2000")
+abline(v = y.test[2000], col = 2, lwd = 3, lty = 2)
+legend("topright", c("Predicted", "Actual"), lwd = 3, col = 1:2, lty = 1:2)
+```
+
+![](./reference/figures/Rplot10.png)![](./reference/figures/Rplot11.png)
+
+For instance, the plots above show the posterior predictive distribution
+along with the actual response values for the first and last points in
+the held-out set.
+
+Given a held-out set, one can evaluate the out-of-sample predictive
+performance of the model using the expected log point-wise predictive
+density (elppd) through the function [`elppd()`](reference/elppd.md).
+
+``` r
+
+bnplasso::elppd(out.bnp, X.test, y.test)
+```
+
+    -1.503273
+
+If a held-out set is not available, one can estimate the model fit using
+the functions [`psis.loo()`](reference/psis.loo.md) and
+[`widely.aic()`](reference/widely.aic.md), which compute the
+Pareto-smoothed importance sampling leave-one-out information criterion
+(PSIS-LOO) and the Watanabe–Akaike information criterion (WAIC), as in
+Vehtari et al. (2017).
+
+``` r
+
+bnplasso::psis.loo(out.bnp)
+bnplasso::widely.aic(out.bnp)
+```
+
+    710.662
+    709.8214
+
+Additional guidelines and help pages for using the package functions are
+available
+[here](https://marinsantiago.github.io/bnplasso-site/reference/index.html).
+
+Source code and data to reproduce the results from Marin et al. (2026)
+are available at <https://github.com/marinsantiago/bnplasso-examples>.
+
+##  Citation
+
+If you use any part of this package in your work, please consider citing
+our *JCGS* paper:
+
+``` tex
+@article{marin_bnplasso,
+  title   = {Adaptive Shrinkage with a Nonparametric {B}ayesian Lasso},
+  author  = {Santiago Marin and Bronwyn Loong and Anton H. Westveld},
+  journal = {Journal of Computational and Graphical Statistics},
+  volume  = {35},
+  number  = {2},
+  pages   = {854--864},
+  year    = {2026},
+  doi     = {10.1080/10618600.2025.2572327}
+}
+```
+
+## Disclaimer
+
+The software is provided “as is,” without warranty of any kind, express
+or implied, including but not limited to the warranties of
+merchantability, fitness for a particular purpose and noninfringement.
+In no event shall the authors or copyright holders be liable for any
+claim, damages, or other liability, whether in an action of contract,
+tort or otherwise, arising from, out of, or in connection with the
+software or the use or other dealings in the software.
+
+##  References
+
+Leng, C., Tran, M.-N., and Nott, D. (2014). “Bayesian Adaptive Lasso.”
+*Annals of the Institute of Statistical Mathematics*, **66**, 221–244.
+
+Marin, S., Loong, B., and Westveld, A. H. (2026), “Adaptive Shrinkage
+with a Nonparametric Bayesian Lasso.” *Journal of Computational and
+Graphical Statistics*, **35**(2), 854–864.
+[doi:10.1080/10618600.2025.2572327](https://doi.org/10.1080/10618600.2025.2572327)
+
+Park, T. and Casella, G. (2008). “The Bayesian Lasso.” *Journal of the
+American Statistical Association*, **103**(482), 681–686.
+
+Vehtari, A., Gelman, A., and Gabry, J. (2017). “Practical Bayesian model
+evaluation using leave-one-out cross-validation and WAIC.” *Statistics
+and Computing* **27**, 1413–1432.
+
+Wade, S. and Ghahramani, Z. (2008). “Bayesian cluster analysis: Point
+estimation and credible balls (with discussion).” *Bayesian Analysis*,
+**13**(2), 559–626.
+
+# Package index
+
+## All functions
+
+- [`bnplasso-package`](bnplasso.md) [`bnplasso`](bnplasso.md) :
+  bnplasso: Fit linear regression models with the Nonparametric Bayesian
+  Lasso
+
+- [`bnplasso_lm()`](bnplasso_lm.md) : Fit linear regression models with
+  a nonparametric Bayesian Lasso prior
+
+- [`bnplasso_spm()`](bnplasso_spm.md) : Fit sparse means models with a
+  nonparametric Bayesian Lasso prior
+
+- [`coclust.point()`](coclust.point.md) : Posterior co-clustering plot
+
+- [`coclust.probs()`](coclust.probs.md) : Posterior co-clustering
+  probabilities plot
+
+- [`coef(`*`<lmBayes>`*`)`](coef.lmBayes.md) : Regression coefficients
+
+- [`coef(`*`<spmBayes>`*`)`](coef.spmBayes.md) : Mean parameters
+
+- [`elppd()`](elppd.md) : Expected log pointwise predictive density
+  (elppd)
+
+- [`fitted(`*`<lmBayes>`*`)`](fitted.lmBayes.md) : Fitted values
+
+- [`fitted(`*`<spmBayes>`*`)`](fitted.spmBayes.md) : Fitted values
+
+- [`get.partition()`](get.partition.md) : Recover a partition
+
+- [`plot(`*`<lmBayes>`*`)`](plot.lmBayes.md) :
+
+  Plot the results and diagnostics for an object of class `lmBayes`
+
+- [`plot(`*`<spmBayes>`*`)`](plot.spmBayes.md) :
+
+  Plot the results and diagnostics for an object of class `spmBayes`
+
+- [`point.estimates()`](point.estimates.md) : Point estimates of the
+  regression coefficients
+
+- [`predict(`*`<lmBayes>`*`)`](predict.lmBayes.md) : Posterior
+  predictive distribution for new data
+
+- [`print(`*`<lmBayes>`*`)`](print.lmBayes.md) :
+
+  Print the results for an object of class `lmBayes`
+
+- [`print(`*`<spmBayes>`*`)`](print.spmBayes.md) :
+
+  Print the results for an object of class `spmBayes`
+
+- [`psis.loo()`](psis.loo.md) : PSIS-LOO
+
+- [`residuals(`*`<lmBayes>`*`)`](residuals.lmBayes.md) :
+
+  Residuals from an object of class `lmBayes`
+
+- [`summary(`*`<lmBayes>`*`)`](summary.lmBayes.md) :
+
+  Summary table of the results for an object of class `lmBayes`
+
+- [`summary(`*`<spmBayes>`*`)`](summary.spmBayes.md) :
+
+  Summary table of the results for an object of class `spmBayes`
+
+- [`widely.aic()`](widely.aic.md) : WAIC
+
