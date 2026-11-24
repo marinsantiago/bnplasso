@@ -49,7 +49,7 @@ devtools::build()
 devtools::install()
 ```
 
-A detailed *changelog* is available [here](https://marinsantiago.github.io/bnplasso-site/news/index.html).
+A detailed *changelog* is available [here](https://marinsantiago.github.io/bnplasso/news/index.html).
 
 ## Usage
 
@@ -273,7 +273,7 @@ bnplasso::widely.aic(out.bnp)
 709.8214
 ```
 
-Additional guidelines and help pages for using the package functions are available [here](https://marinsantiago.github.io/bnplasso-site/reference/index.html).
+Additional guidelines and help pages for using the package functions are available [here](https://marinsantiago.github.io/bnplasso/reference/index.html).
 
 Source code and data to reproduce the results from Marin et al. (2026) are available at [https://github.com/marinsantiago/bnplasso-examples](https://github.com/marinsantiago/bnplasso-examples).
 
